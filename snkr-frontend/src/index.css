@@ -1,16 +1,28 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Helvetica"),
+    url("../src/assets/fonts/Helvetica/Helvetica.woff") format("woff");
+}
+
 a.active hr {
   display: block;
 }
 
 /* ::-webkit-scrollbar{
-    display: none;
+    display: none; 
 } */
-
+/* 
 @media (max-width: 640px) {
   a.active {
     background-color: black;
     color: white;
   }
+} */
+
+p {
+  font-family: Helvetica;
 }
