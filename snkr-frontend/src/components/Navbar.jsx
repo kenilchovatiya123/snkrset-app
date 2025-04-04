@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <div className="flex flex-col px-2 lg:px-[2vw] border-b border-b-gray-200 pb-4">
-      <div className="flex items-center justify-between py-5 font-medium">
+      <div className="flex items-center justify-between py-3 font-medium">
         <img
           onClick={() => setVisible(true)}
           src={assets.menu_icon}
@@ -52,13 +52,13 @@ const Navbar = () => {
           </h1>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2">
           <div className="group hidden sm:block">
             <img
               onClick={() => (token ? null : navigate("/login"))}
               src={assets.profile_icon}
               alt=""
-              className="w-5 cursor-pointer"
+              className="w-8 cursor-pointer"
             />
             {/* Dropdown Menu */}
             {token && (
@@ -89,7 +89,7 @@ const Navbar = () => {
             />
           </div>
           <Link to="/cart" className="relative">
-            <img src={assets.cart_icon} className="w-5 min-w-5" alt="" />
+            <img src={assets.cart_icon} className="w-8" alt="" />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
               {getCartCount()}
             </p>
