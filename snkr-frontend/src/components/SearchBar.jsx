@@ -1,32 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ShopContext } from '../context/ShopContext'
-import { assets } from '../assets/assets';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import { assets } from "../assets/assets";
 
 const SearchBar = () => {
-
-    const { Search, setSearch, showSearch, setShowSearch } = useContext(ShopContext);
-    const [visible, setVisible] = useState(false);
-    const location = useLocation();
-
-    useEffect(() => {
-        if (location.pathname.includes('collections')) {
-            setVisible(true);
-        }
-        else {
-            setVisible(false);
-        }
-    }, [location])
-
-    return showSearch && visible ? (
-        <div className='border-t border-b bg-gray-50 text-center'>
-            <div className='inline-flex items-center justify-center border border-gray-400 px-5 py-2 my-5 mx-3 rounded-full w-3/4 sm:w-1/2'>
-                <input value={Search} onChange={(e) => setSearch(e.target.value)} className='flex-1 outline-none bg-inherit text-sm' type="text" placeholder='Search' />
-                <img className='w-4' src={assets.search_icon} alt="" />
-            </div>
-            <img onClick={() => setShowSearch(false)} className='inline w-3 cursor-pointer' src={assets.cross_icon} alt="" />
+  return (
+    <div className="w-full px-4 py-2 sm:px-6">
+      <div className="relative w-full">
+        <div className="absolute inset-y-0 left-0 flex items-center px-2">
+          <img src={assets.search_icon} className="w-5 text-gray-500" alt="search" />
         </div>
-    ) : null
-}
+        <input
+          type="text"
+          className="block w-full py-2 pl-9 pr-4 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 outline-none"
+          placeholder="Search Products..."
+        />
+      </div>
+    </div>
+  );
+};
 
-export default SearchBar
+export default SearchBar;

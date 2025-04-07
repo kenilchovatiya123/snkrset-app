@@ -21,41 +21,38 @@ import img_15 from "./air-jordan-1-x-off-white-retro-h.png"
 import logo from "./logo.jpg";
 import hero_img from "./hero_img.png";
 import hero_img_mobile_screen from "./hero_img_mobile_screen.png";
-import cart_icon from "./cart_icon.png";
+import cart_icon from "./cart.svg";
 import bin_icon from "./bin_icon.png";
 import dropdown_icon from "./dropdown_icon.png";
 import fast_delivery_icon from "./fast_delivery_icon.png";
-import profile_icon from "./profile_icon.png";
+import user_icon from "./user.svg";
 import free_shipping_icon from "./free_shipping_icon.png";
-import search_icon from "./search_icon.png";
+import search_icon from "./search.svg";
 import star_dull_icon from "./star_dull_icon.png";
 import star_icon from "./star_icon.png";
 import secure_payment_icon from "./secure_payment_icon.png";
-import menu_icon from "./menu_icon.png";
+import menu_icon from "./menu.svg";
 import about_img1 from "./about_store.jpg";
 import contact_img from "./contact_img.png";
 import razorpay_logo from "./razorpay_logo.png";
 import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
 import filter_icon from './filter_icon.png'
-
+import down_arrow_icon from './down-arrow.svg'
 export const assets = {
   logo,
   hero_img,
   hero_img_mobile_screen,
   cart_icon,
   dropdown_icon,
-  // exchange_icon,
   fast_delivery_icon,
   secure_payment_icon,
   free_shipping_icon,
-  profile_icon,
-  // quality_icon,
+  user_icon,
   search_icon,
   star_dull_icon,
   star_icon,
   bin_icon,
-  // support_img,
   menu_icon,
   about_img1,
   contact_img,
@@ -63,6 +60,7 @@ export const assets = {
   stripe_logo,
   cross_icon,
   filter_icon,
+  down_arrow_icon
 };
 
 export const products = [

@@ -21,12 +21,13 @@ const App = () => {
     <div className="w-full">
       <ToastContainer />
       <Navbar />
-      <SearchBar />
+      <div className="lg:hidden">
+        <SearchBar />
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collections" element={<Collections />} />
-        <Route path="/footwear" element={<Footwear/>}/>
-        {/* <Route path="/newcollections" element={<newCollections/>}/> */}
+        <Route path="/footwear" element={<Footwear />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/:productId" element={<Products />} />
