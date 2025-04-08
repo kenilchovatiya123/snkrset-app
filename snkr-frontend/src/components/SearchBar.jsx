@@ -6,7 +6,11 @@ const SearchBar = () => {
     <div className="w-full px-4 py-2 sm:px-6">
       <div className="relative w-full">
         <div className="absolute inset-y-0 left-0 flex items-center px-2">
-          <img src={assets.search_icon} className="w-5 text-gray-500" alt="search" />
+          <img
+            src={assets.search_icon}
+            className="w-5 text-gray-500"
+            alt="search"
+          />
         </div>
         <input
           type="text"

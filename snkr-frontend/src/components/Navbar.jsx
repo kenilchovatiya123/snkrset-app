@@ -11,8 +11,6 @@ const Navbar = () => {
   const [luxuryOpen, setLuxuryOpen] = useState(false);
   const [showSneakersDropdown, setShowSneakersDropdown] = useState(false);
   const [showApparelDropdown, setShowApparelDropdown] = useState(false);
-  const [hoveredSneakerCategory, setHoveredSneakerCategory] = useState('');
-
 
   const {
     setShowSearch,
