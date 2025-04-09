@@ -364,7 +364,7 @@ const Navbar = () => {
                   <div className="mb-3">
                     <p className="font-semibold text-black">Air Jordan</p>
                     <div className="ml-3 mt-1 text-gray-700 flex flex-col gap-1">
-                      <NavLink to="/sneakers/airjordan1">Air Jordan 1</NavLink>
+                      <NavLink to="/collections/airjordan1">Air Jordan 1</NavLink>
                       <NavLink to="/sneakers/air-jordan-low">
                         Air Jordan Low
                       </NavLink>

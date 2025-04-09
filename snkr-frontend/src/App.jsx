@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footwear from "./pages/Footwear"; // <-- Sneaker listing page
 import Navbar from "./components/layout/Navbar";
 import AirJordan1 from "./pages/collections/AirJordan1";
-
+import Sneakers from "./pages/Sneakers";
 const App = () => {
   return (
     <div className="w-full">
@@ -34,8 +34,9 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
-        <Route path="/sneakers/airjordan1" element={<AirJordan1/>}/>
-
+        {/* <Route path="/sneakers/airjordan1" element={<AirJordan1/>}/> */}
+        <Route path="/collections/airjordan1" element={<AirJordan1 />} />
+        <Route path="/sneakers" element={<Sneakers />} />
         {/* Auth & Checkout */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />

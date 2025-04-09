@@ -4,15 +4,8 @@ import productModel from "../models/productModel.js";
 // function for add product
 const addProduct = async (req, res) => {
   try {
-    const {
-      name,
-      sub_name,
-      price,
-      category,
-      subCategory,
-      sizes,
-      bestseller,
-    } = req.body;
+    const { name, sub_name, price, category, subCategory, sizes, bestseller } =
+      req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
     const image2 = req.files.image2 && req.files.image2[0];
@@ -50,20 +43,34 @@ const addProduct = async (req, res) => {
     await product.save();
 
     return res.json({ success: true, message: "Product added" }); // ✅ Only one response
-
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: error.message }); // ✅ Return here as well
   }
 };
 // function for list product
+// const listProducts = async (req, res) => {
+//   try {
+//     const products = await productModel.find({});
+//     res.json({ success: true, products });
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ success: false, message: error.message });
+//   }
+// };
 const listProducts = async (req, res) => {
   try {
-    const products = await productModel.find({});
-    res.json({ success: true, products });
+    const { type } = req.query;
+    const filter = {};
+
+    if (type) {
+      filter.type = type;
+    }
+
+    const products = await productModel.find(filter);
+    res.json(products);
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
+    res.status(500).json({ message: "Failed to fetch products", error });
   }
 };
 
@@ -90,4 +97,21 @@ const singleProduct = async (req, res) => {
   }
 };
 
-export { listProducts, addProduct, removeProduct, singleProduct };
+// function for products by type
+const getProductsByType = async (req, res) => {
+  try {
+    const { type } = req.query;
+
+    if (!type) {
+      return res.status(400).json({ message: "Missing type in query" });
+    }
+
+    const products = await productModel.find({ type });
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err });
+  }
+};
+
+
+export { listProducts, addProduct, removeProduct, singleProduct, getProductsByType };

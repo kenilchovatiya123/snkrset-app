@@ -18,6 +18,54 @@ const Add = ({ token }) => {
   const [suCategory, setSubCategory] = useState("Topwear");
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  const [sizeOptions, setSizeOptions] = useState([]);
+
+  const [product, setProduct] = useState({
+    name: "",
+    sub_name: "",
+    price: "",
+    image: [],
+    category: "",
+    subCategory: "",
+    sizes: [],
+    bestseller: false,
+    date: Date.now(),
+    type: "", // ✅ Add this line
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    if (name === "category") {
+      setProduct((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+
+      // Set size options based on category
+      if (value === "Clothing") {
+        setSizeOptions(["S", "M", "L", "XL", "XXL"]);
+      } else if (value === "Footwear") {
+        setSizeOptions(["UK6", "UK7", "UK8", "UK9", "UK10"]);
+      } else {
+        setSizeOptions([]);
+      }
+    } else if (name === "sizes") {
+      const updatedSizes = checked
+        ? [...product.sizes, value]
+        : product.sizes.filter((size) => size !== value);
+
+      setProduct((prev) => ({
+        ...prev,
+        sizes: updatedSizes,
+      }));
+    } else {
+      setProduct((prev) => ({
+        ...prev,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+    }
+  };
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -40,7 +88,7 @@ const Add = ({ token }) => {
       image4 && formData.append("image4", image4);
 
       const response = await axios.post(
-        backendUrl + "/api/product/add",
+        backendUrl + "/api/products/add",
         formData,
         { headers: { token } }
       );
@@ -178,12 +226,32 @@ const Add = ({ token }) => {
         <div>
           <p className="mb-2">Sub category</p>
           <select
-            onChange={(e) => setSubCategory(e.target.value)}
+            value={suCategory}
+            onChange={(e) => {
+              const value = e.target.value;
+              setSubCategory(value);
+
+              // Set sizes based on subcategory
+              if (
+                value === "Topwear" ||
+                value === "Bottomwear" ||
+                value === "Winterwear"
+              ) {
+                setSizeOptions(["S", "M", "L", "XL", "XXL"]);
+              } else if (value === "Footwear") {
+                setSizeOptions(["UK6", "UK7", "UK8", "UK9", "UK10"]);
+              } else {
+                setSizeOptions([]);
+              }
+
+              setSizes([]); // Reset sizes on subcategory change
+            }}
             className="w-full px-3 py-1"
           >
             <option value="Topwear">Topwear</option>
             <option value="Bottomwear">Bottomwear</option>
-            <option value="Winterwaer">Winterwaer</option>
+            <option value="Winterwear">Winterwear</option>
+            <option value="Footwear">Footwear</option>
           </select>
         </div>
 
@@ -199,100 +267,33 @@ const Add = ({ token }) => {
         </div>
       </div>
 
-      <div>
-        <p className="mb-2">Product Sizes</p>
-        <div className="flex gap-3">
-          <div
-            onClick={() =>
-              setSizes((prev) =>
-                prev.includes("S")
-                  ? prev.filter((item) => item !== "S")
-                  : [...prev, "S"]
-              )
-            }
-          >
-            <p
-              className={`${
-                sizes.includes("S") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
-            >
-              S
-            </p>
-          </div>
-
-          <div
-            onClick={() =>
-              setSizes((prev) =>
-                prev.includes("M")
-                  ? prev.filter((item) => item !== "M")
-                  : [...prev, "M"]
-              )
-            }
-          >
-            <p
-              className={`${
-                sizes.includes("M") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
-            >
-              M
-            </p>
-          </div>
-
-          <div
-            onClick={() =>
-              setSizes((prev) =>
-                prev.includes("L")
-                  ? prev.filter((item) => item !== "L")
-                  : [...prev, "L"]
-              )
-            }
-          >
-            <p
-              className={`${
-                sizes.includes("L") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
-            >
-              L
-            </p>
-          </div>
-
-          <div
-            onClick={() =>
-              setSizes((prev) =>
-                prev.includes("XL")
-                  ? prev.filter((item) => item !== "XL")
-                  : [...prev, "XL"]
-              )
-            }
-          >
-            <p
-              className={`${
-                sizes.includes("XL") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
-            >
-              XL
-            </p>
-          </div>
-
-          <div
-            onClick={() =>
-              setSizes((prev) =>
-                prev.includes("XXL")
-                  ? prev.filter((item) => item !== "XXL")
-                  : [...prev, "XXL"]
-              )
-            }
-          >
-            <p
-              className={`${
-                sizes.includes("XXL") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
-            >
-              XXL
-            </p>
+      {sizeOptions.length > 0 && (
+        <div>
+          <p className="mb-2">Product Sizes</p>
+          <div className="flex gap-3 flex-wrap">
+            {sizeOptions.map((size) => (
+              <div
+                key={size}
+                onClick={() =>
+                  setSizes((prev) =>
+                    prev.includes(size)
+                      ? prev.filter((item) => item !== size)
+                      : [...prev, size]
+                  )
+                }
+              >
+                <p
+                  className={`${
+                    sizes.includes(size) ? "bg-pink-100" : "bg-slate-200"
+                  } px-3 py-1 cursor-pointer`}
+                >
+                  {size}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      )}
 
       <div className="flex gap-2 mt-2">
         <input
@@ -305,6 +306,18 @@ const Add = ({ token }) => {
           Add to bestseller
         </label>
       </div>
+
+      <select
+        name="type"
+        value={product.type}
+        onChange={handleChange}
+        className="border p-2 rounded"
+      >
+        <option value="">Select Product Type</option>
+        <option value="Air Jordan 1">Air Jordan 1</option>
+        <option value="Dunk Low">Dunk Low</option>
+        <option value="T-shirt">T-shirt</option>
+      </select>
 
       <button type="submit" className="w-28 py-3 mt-4 bg-black text-white">
         ADD
