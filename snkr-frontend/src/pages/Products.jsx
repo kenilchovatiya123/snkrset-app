@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import PrivacyPolicy from "../policies/PrivacyPolicy";
-import RelatedProducts from "../components/RelatedProducts";
+import RelatedProducts from "../components/product/RelatedProducts";
 
 const Products = () => {
   const { productId } = useParams();

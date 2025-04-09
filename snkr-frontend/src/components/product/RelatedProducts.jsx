@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../context/ShopContext";
-import Title from "./Title";
+import { ShopContext } from "../../context/ShopContext";
+import Title from "../shared/Title";
 import ProductItem from "./ProductItem";
 
 const RelatedProducts = ({ category, subCategory }) => {

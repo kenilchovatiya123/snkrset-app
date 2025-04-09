@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Title from "../components/Title";
-import NewLetterBox from "../components/NewLetterBox";
+import Title from "../components/shared/Title";
+import NewLetterBox from "../components/homepage/NewLetterBox";
 
 const Contact = () => {
   //   const onSubmitHandler = async (event) => {

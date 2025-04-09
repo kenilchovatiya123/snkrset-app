@@ -1,14 +1,14 @@
 import React from "react";
-import Hero from "../components/Hero";
-import LatestCollection from "../components/LatestCollection";
-import BestSeller from "../components/BestSeller";
+import Hero from "../components/homepage/Hero";
+import LatestCollection from "../components/homepage/LatestCollections";
+import BestSeller from "../components/homepage/BestSeller";
 import PrivacyPolicy from "../policies/PrivacyPolicy";
-import NewLetterBox from "../components/NewLetterBox";
+import NewLetterBox from "../components/homepage/NewLetterBox";
 
 const Home = () => {
   return (
     <div>
-      <Hero />
+      <Hero/>
       <LatestCollection />
       <BestSeller />
       <PrivacyPolicy />

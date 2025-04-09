@@ -1,7 +1,7 @@
 import React from "react";
-import Title from "../components/Title";
+import Title from "../components/shared/Title";
 import { assets } from "../assets/assets";
-import NewLetterBox from "../components/NewLetterBox";
+import NewLetterBox from "../components/homepage/NewLetterBox";
 
 const About = () => {
   return (
