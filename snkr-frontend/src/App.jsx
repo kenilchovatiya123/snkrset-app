@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Collections from "./pages/Collections";
+// import Collections from "./pages/Collections";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ProductDetails from "./pages/Products";
@@ -9,14 +9,16 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import PlaceOrder from "./pages/PlaceOrder";
 import Orders from "./pages/Orders";
-import Footer from "./components/shared/Footer";
-import SearchBar from "./components/shared/SearchBar";
+import Footer from "./components/layout/Footer";
+import SearchBar from "./components/layout/SearchBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footwear from "./pages/Footwear"; // <-- Sneaker listing page
 import Navbar from "./components/layout/Navbar";
-import AirJordan1 from "./pages/collections/AirJordan1";
-import Sneakers from "./pages/Sneakers";
+import AirJordans from "./pages/sneakers/AirJordans";
+import Dior from "./pages/sneakers/Dior";
+import SbDunks from "./pages/sneakers/SbDunks";
+import Shirts from "./pages/apparels/Shirts";
 const App = () => {
   return (
     <div className="w-full">
@@ -29,14 +31,22 @@ const App = () => {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/collections" element={<Collections />} />
-        <Route path="/footwear" element={<Footwear />} /> {/* All Sneakers */}
+        {/* <Route path="/collections" element={<Collections />} /> */}
+        <Route path="/footwear" element={<Footwear />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
-        {/* <Route path="/sneakers/airjordan1" element={<AirJordan1/>}/> */}
-        <Route path="/collections/airjordan1" element={<AirJordan1 />} />
-        <Route path="/sneakers" element={<Sneakers />} />
+
+        {/* products routes */}
+        <Route path="/sneakers/air-jordans" element={<AirJordans />} />
+        <Route path="/sneakers/sb-dunks" element={<SbDunks />} />
+        {/* <Route path="/sneakers/yeezy350" element={<Yeezy350 />} /> */}
+        {/* <Route path="/sneakers/louis-vuitton" element={<LouisVuitton />} /> */}
+        <Route path="/sneakers/dior" element={<Dior />} />
+        {/* <Route path="/sneakers/gucci" element={<Gucci />} /> */}
+        {/* <Route path="/sneakers/prada" element={<Prada />} /> */}
+        <Route path="/apparels/shirts" element={<Shirts />} />
+
         {/* Auth & Checkout */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />

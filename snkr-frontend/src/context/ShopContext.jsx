@@ -53,24 +53,39 @@ const ShopContextProvider = (props) => {
 
   const getCartCount = () => {
     let totalCount = 0;
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        try {
-          if (cartItems[items][item] > 0) {
-            totalCount += cartItems[items][item];
-          }
-        } catch (error) {}
+    for (const itemId in cartItems) {
+      for (const size in cartItems[itemId]) {
+        const quantity = cartItems[itemId][size];
+        const productExists = products.some((p) => p._id === itemId);
+        if (quantity > 0 && productExists) {
+          totalCount += quantity;
+        }
       }
     }
     return totalCount;
   };
+  
 
   const updateQuantity = async (itemId, size, quantity) => {
     let cartData = structuredClone(cartItems);
-    cartData[itemId][size] = quantity;
-
+  
+    if (quantity === 0) {
+      // Remove the size
+      delete cartData[itemId][size];
+  
+      // If no sizes left for this item, remove the item
+      if (Object.keys(cartData[itemId]).length === 0) {
+        delete cartData[itemId];
+      }
+    } else {
+      // Update or add the size quantity
+      if (!cartData[itemId]) cartData[itemId] = {};
+      cartData[itemId][size] = quantity;
+    }
+  
     setCartItems(cartData);
-
+    localStorage.setItem("cartItems", JSON.stringify(cartData)); // Optional: keep storage synced
+  
     if (token) {
       try {
         await axios.post(
@@ -84,6 +99,7 @@ const ShopContextProvider = (props) => {
       }
     }
   };
+  
 
   const getCartAmount = () => {
     let totalAmount = 0;

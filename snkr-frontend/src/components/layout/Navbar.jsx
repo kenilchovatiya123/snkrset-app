@@ -6,9 +6,6 @@ import { ShopContext } from "../../context/ShopContext";
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [openMenu, setOpenMenu] = useState("");
-  const [airJordanOpen, setAirJordanOpen] = useState(false);
-  const [dunksOpen, setDunksOpen] = useState(false);
-  const [luxuryOpen, setLuxuryOpen] = useState(false);
   const [showSneakersDropdown, setShowSneakersDropdown] = useState(false);
   const [showApparelDropdown, setShowApparelDropdown] = useState(false);
   const [showAccessoriesDropdown, setShowAccessoriesDropdown] = useState(false);
@@ -29,12 +26,6 @@ const Navbar = () => {
     setToken("");
     setCartItems({});
   };
-
-  // const handleSearch = (e) => {
-  //   if (e.key === "Enter" && searchTerm.trim()) {
-  //     navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-  //   }
-  // };
 
   return (
     <div className="flex flex-col px-4 lg:px-[2vw] border-b border-b-gray-200">
@@ -94,151 +85,40 @@ const Navbar = () => {
                 alt="Toggle"
               />
             </div>
-
             {openMenu === "sneakers" && (
               <div className="ml-4 flex flex-col gap-2 text-[15px] text-gray-600 transition-all duration-300">
-                {/* Air Jordan */}
-                <div className="flex justify-between items-center">
-                  <p>Air Jordan</p>
-                  <img
-                    src={assets.down_arrow_icon}
-                    onClick={() => setAirJordanOpen(!airJordanOpen)}
-                    className={`h-6 cursor-pointer transition-transform duration-300 ${
-                      airJordanOpen ? "rotate-180" : ""
-                    }`}
-                    alt="Toggle"
-                  />
-                </div>
-                {airJordanOpen && (
-                  <div className="ml-4 flex flex-col gap-1">
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/air-jordan-1"
-                    >
-                      Air Jordan 1
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/air-jordan-low"
-                    >
-                      Air Jordan Low
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/air-jordan-high"
-                    >
-                      Air Jordan High
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/air-jordan-4"
-                    >
-                      Air Jordan 4's
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/air-jordan"
-                    >
-                      All Jordans
-                    </NavLink>
-                  </div>
-                )}
-
-                {/* Dunks */}
-                <div className="flex justify-between items-center">
-                  <p>Dunks</p>
-                  <img
-                    src={assets.down_arrow_icon}
-                    onClick={() => setDunksOpen(!dunksOpen)}
-                    className={`h-6 cursor-pointer transition-transform duration-300 ${
-                      dunksOpen ? "rotate-180" : ""
-                    }`}
-                    alt="Toggle"
-                  />
-                </div>
-                {dunksOpen && (
-                  <div className="ml-4 flex flex-col gap-1">
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/dunk-low"
-                    >
-                      Dunk Low
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/sb-dunk"
-                    >
-                      SB Dunks
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/dunk"
-                    >
-                      All Dunks
-                    </NavLink>
-                  </div>
-                )}
-
-                {/* Luxury */}
-                <div className="flex justify-between items-center">
-                  <p>Luxury</p>
-                  <img
-                    src={assets.down_arrow_icon}
-                    onClick={() => setLuxuryOpen(!luxuryOpen)}
-                    className={`h-6 cursor-pointer transition-transform duration-300 ${
-                      luxuryOpen ? "rotate-180" : ""
-                    }`}
-                    alt="Toggle"
-                  />
-                </div>
-                {luxuryOpen && (
-                  <div className="ml-4 flex flex-col gap-1">
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/louis-vuitton"
-                    >
-                      Louis Vuitton
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/dior"
-                    >
-                      Dior
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/gucci"
-                    >
-                      Gucci
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/loro-piana"
-                    >
-                      Loro Piana
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/balenciaga"
-                    >
-                      Balenciaga
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/prada"
-                    >
-                      Prada
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setVisible(false)}
-                      to="/sneakers/luxury"
-                    >
-                      All Luxury Sneakers
-                    </NavLink>
-                  </div>
-                )}
-                <NavLink onClick={() => setVisible(false)} to="/sneakers">
-                  All Sneakers
+                <NavLink
+                  onClick={() => setVisible(false)}
+                  to="/sneakers/air-jordans"
+                >
+                  Air Jordan's
+                </NavLink>
+                <NavLink
+                  onClick={() => setVisible(false)}
+                  to="/sneakers/sb-dunks"
+                >
+                  SB Dunks
+                </NavLink>
+                <NavLink
+                  onClick={() => setVisible(false)}
+                  to="/sneakers/yeezy350"
+                >
+                  Yeezy350
+                </NavLink>
+                <NavLink
+                  onClick={() => setVisible(false)}
+                  to="/sneakers/louis-vuitton"
+                >
+                  Louis Vuitton
+                </NavLink>
+                <NavLink onClick={() => setVisible(false)} to="/sneakers/dior">
+                  Dior
+                </NavLink>
+                <NavLink onClick={() => setVisible(false)} to="/sneakers/gucci">
+                  Gucci
+                </NavLink>
+                <NavLink onClick={() => setVisible(false)} to="/sneakers/prada">
+                  Prada
                 </NavLink>
               </div>
             )}
@@ -251,16 +131,15 @@ const Navbar = () => {
               <img
                 src={assets.down_arrow_icon}
                 onClick={() =>
-                  setOpenMenu(openMenu === "apparel" ? "" : "apparel")
+                  setOpenMenu(openMenu === "apparels" ? "" : "apparels")
                 }
                 className={`h-6 cursor-pointer transition-transform duration-300 ${
-                  openMenu === "apparel" ? "rotate-180" : ""
+                  openMenu === "apparels" ? "rotate-180" : ""
                 }`}
                 alt="Toggle"
               />
             </div>
-
-            {openMenu === "apparel" && (
+            {openMenu === "apparels" && (
               <div className="ml-4 flex flex-col gap-2 text-[15px] text-gray-600 transition-all duration-300">
                 <NavLink
                   onClick={() => setVisible(false)}
@@ -270,24 +149,15 @@ const Navbar = () => {
                 </NavLink>
                 <NavLink
                   onClick={() => setVisible(false)}
-                  to="/apparels/hoodies"
-                >
-                  Hoodies & Sweatshirts
-                </NavLink>
-                <NavLink
-                  onClick={() => setVisible(false)}
                   to="/apparels/shirts"
                 >
                   Shirts
                 </NavLink>
                 <NavLink
                   onClick={() => setVisible(false)}
-                  to="/apparels/shorts"
+                  to="/apparels/jackets"
                 >
-                  Shorts
-                </NavLink>
-                <NavLink onClick={() => setVisible(false)} to="/apparels">
-                  All Apparels
+                  Jackets
                 </NavLink>
               </div>
             )}
@@ -348,6 +218,7 @@ const Navbar = () => {
             >
               <p>SALE!</p>
             </NavLink>
+            {/* SNEAKERS dropdown */}
             <div
               onMouseEnter={() => setShowSneakersDropdown(true)}
               onMouseLeave={() => setShowSneakersDropdown(false)}
@@ -357,49 +228,18 @@ const Navbar = () => {
                 <p>SNEAKERS</p>
               </NavLink>
 
-              {/* SNEAKERS DROPDOWN */}
               {showSneakersDropdown && (
-                <div className="absolute top-[100%] left-0 w-[320px] bg-white shadow-lg rounded-md p-4 text-sm z-30">
-                  {/* Air Jordan */}
-                  <div className="mb-3">
-                    <p className="font-semibold text-black">Air Jordan</p>
-                    <div className="ml-3 mt-1 text-gray-700 flex flex-col gap-1">
-                      <NavLink to="/collections/airjordan1">Air Jordan 1</NavLink>
-                      <NavLink to="/sneakers/air-jordan-low">
-                        Air Jordan Low
-                      </NavLink>
-                      <NavLink to="/sneakers/air-jordan-high">
-                        Air Jordan High
-                      </NavLink>
-                      <NavLink to="/sneakers/air-jordan-4">
-                        Air Jordan 4's
-                      </NavLink>
-                      <NavLink to="/sneakers">All Jordans</NavLink>
-                    </div>
-                  </div>
-                  {/* Dunks */}
-                  <div className="mb-3">
-                    <p className="font-semibold text-black">Dunks</p>
-                    <div className="ml-3 mt-1 text-gray-700 flex flex-col gap-1">
-                      <NavLink to="/sneakers/dunk-low">Dunk Low</NavLink>
-                      <NavLink to="/sneakers/sb-dunks">SB Dunks</NavLink>
-                      <NavLink to="/sneakers">All Dunks</NavLink>
-                    </div>
-                  </div>
-                  {/* Luxury */}
-                  <div>
-                    <p className="font-semibold text-black">Luxury</p>
-                    <div className="ml-3 mt-1 text-gray-700 flex flex-col gap-1">
-                      <NavLink to="/sneakers/louis-vuitton">
-                        Louis Vuitton
-                      </NavLink>
-                      <NavLink to="/sneakers/dior">Dior</NavLink>
-                      <NavLink to="/sneakers/gucci">Gucci</NavLink>
-                      <NavLink to="/sneakers/loro-piana">Loro Piana</NavLink>
-                      <NavLink to="/sneakers/balenciaga">Balenciaga</NavLink>
-                      <NavLink to="/sneakers/prada">Prada</NavLink>
-                      <NavLink to="/sneakers">All Luxury Sneakers</NavLink>
-                    </div>
+                <div className="absolute top-[100%] left-0 w-[250px] bg-white shadow-lg rounded-md p-4 text-sm z-30">
+                  <div className="text-gray-700 flex flex-col gap-1">
+                    <NavLink to="/sneakers/air-jordans">Air Jordan's</NavLink>
+                    <NavLink to="/sneakers/sb-dunks">SB Dunks</NavLink>
+                    <NavLink to="/sneakers/yeezy350">Yeezy350</NavLink>
+                    <NavLink to="/sneakers/louis-vuitton">
+                      Louis Vuitton
+                    </NavLink>
+                    <NavLink to="/sneakers/dior">Dior</NavLink>
+                    <NavLink to="/sneakers/gucci">Gucci</NavLink>
+                    <NavLink to="/sneakers/prada">Prada</NavLink>
                   </div>
                 </div>
               )}
@@ -413,16 +253,13 @@ const Navbar = () => {
               <NavLink to="/apparels" className="flex items-center gap-1">
                 <p>APPARELS</p>
               </NavLink>
+
               {showApparelDropdown && (
                 <div className="absolute top-[100%] left-0 w-[250px] bg-white shadow-lg rounded-md p-4 text-sm z-30">
                   <div className="text-gray-700 flex flex-col gap-1">
-                    <NavLink to="/apparels/tshirts">T-Shirts</NavLink>
-                    <NavLink to="/apparels/hoodies">
-                      Hoodies & Sweatshirts
-                    </NavLink>
+                    <NavLink to="/apparels/t-shirts">T-Shirts</NavLink>
                     <NavLink to="/apparels/shirts">Shirts</NavLink>
-                    <NavLink to="/apparels/shorts">Shorts</NavLink>
-                    <NavLink to="/apparels">All Apparels</NavLink>
+                    <NavLink to="/apparels/jackets">Jackets</NavLink>
                   </div>
                 </div>
               )}
@@ -434,15 +271,15 @@ const Navbar = () => {
               className="relative"
             >
               <NavLink to="/accessories" className="flex items-center gap-1">
-                <p>ACCESSORIES</p>
+                <p>APPARELS</p>
               </NavLink>
+
               {showAccessoriesDropdown && (
                 <div className="absolute top-[100%] left-0 w-[250px] bg-white shadow-lg rounded-md p-4 text-sm z-30">
                   <div className="text-gray-700 flex flex-col gap-1">
                     <NavLink to="/accessories/bags">Bags</NavLink>
                     <NavLink to="/accessories/belts">Belts</NavLink>
-                    <NavLink to="/accessories/wallets">Wallets</NavLink>
-                    <NavLink to="/accessories">All Accessories</NavLink>
+                    <NavLink to="/accessories/wallet">Wallet</NavLink>
                   </div>
                 </div>
               )}

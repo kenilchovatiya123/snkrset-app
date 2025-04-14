@@ -39,6 +39,7 @@ import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
 import filter_icon from './filter_icon.png'
 import down_arrow_icon from './down-arrow.svg'
+import close_icon from './close.svg'
 export const assets = {
   logo,
   hero_img,
@@ -60,7 +61,8 @@ export const assets = {
   stripe_logo,
   cross_icon,
   filter_icon,
-  down_arrow_icon
+  down_arrow_icon,
+  close_icon
 };
 
 export const products = [

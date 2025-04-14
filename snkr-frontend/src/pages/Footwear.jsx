@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
-import Title from "../components/shared/Title";
+import Title from "../components/layout/Title";
 import ProductItem from "../components/product/ProductItem";
 
 const Footwear = () => {

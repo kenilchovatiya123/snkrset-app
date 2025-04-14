@@ -1,21 +1,25 @@
 import React, { useContext, useState } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import { Link } from "react-router-dom";
+import QuickviewModal from "../../pages/QuickviewModal"; // Adjust the path if needed
 
 const ProductItem = ({ id, image, name, sub_name, price }) => {
   const { currency } = useContext(ShopContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = (e) => {
+    e.preventDefault(); // Prevent link navigation
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <div className="relative bg-neutral-100 p-2 sm:p-4 rounded-sm overflow-hidden group cursor-pointer">
-      {/* NEW Label */}
-      <span className="absolute top-2 left-2 bg-black text-white text-xs px-2 py-1 uppercase">
-        New
-      </span>
-
-      {/* Product Image */}
-      <div className="flex justify-center items-center h-36 sm:h-64">
+      {/* Product Image with Quickview Hover */}
+      <div className="relative flex justify-center items-center h-36 sm:h-64 overflow-hidden">
         <img
-          className="w-auto h-40 md:h-44 sm:h-64 object-contain mix-blend-multiply"
+          className="w-auto h-40 md:h-44 sm:h-64 object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
           src={image?.[0]}
           srcSet={
             image?.[0]
@@ -42,6 +46,14 @@ const ProductItem = ({ id, image, name, sub_name, price }) => {
           width="2048"
           height="2048"
         />
+
+        {/* QUICKVIEW Overlay */}
+        <div
+          onClick={handleOpenModal}
+          className="absolute bottom-0 left-0 w-full bg-white bg-opacity-90 text-center py-2 text-sm font-medium text-black opacity-0 group-hover:opacity-100 translate-y-full group-hover:translate-y-0 transition-all duration-300"
+        >
+          QUICKVIEW
+        </div>
       </div>
 
       <hr className="text-gray-200 py-2" />
@@ -59,6 +71,14 @@ const ProductItem = ({ id, image, name, sub_name, price }) => {
           {price}
         </p>
       </Link>
+
+      {/* Quickview Modal */}
+      {isModalOpen && (
+        <QuickviewModal
+          product={{ _id: id, image, name, sub_name, price }}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

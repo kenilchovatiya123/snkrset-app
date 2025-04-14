@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "../components/shared/Title";
+import Title from "../components/layout/Title";
 import { assets } from "../assets/assets";
 import NewLetterBox from "../components/homepage/NewLetterBox";
 

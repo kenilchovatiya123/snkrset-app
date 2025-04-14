@@ -4,7 +4,7 @@ import productModel from "../models/productModel.js";
 // function for add product
 const addProduct = async (req, res) => {
   try {
-    const { name, sub_name, price, category, subCategory, sizes, bestseller } =
+    const { name, sub_name, price, subCategory, brand, sizes, bestseller } =
       req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
@@ -28,7 +28,7 @@ const addProduct = async (req, res) => {
     const productData = {
       name,
       sub_name,
-      category,
+      brand,
       price: Number(price),
       subCategory,
       bestseller: bestseller === "true" ? true : false,
@@ -49,28 +49,13 @@ const addProduct = async (req, res) => {
   }
 };
 // function for list product
-// const listProducts = async (req, res) => {
-//   try {
-//     const products = await productModel.find({});
-//     res.json({ success: true, products });
-//   } catch (error) {
-//     console.log(error);
-//     res.json({ success: false, message: error.message });
-//   }
-// };
 const listProducts = async (req, res) => {
   try {
-    const { type } = req.query;
-    const filter = {};
-
-    if (type) {
-      filter.type = type;
-    }
-
-    const products = await productModel.find(filter);
-    res.json(products);
+    const products = await productModel.find({});
+    res.json({ success: true, products });
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch products", error });
+    console.log(error);
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -97,21 +82,29 @@ const singleProduct = async (req, res) => {
   }
 };
 
-// function for products by type
-const getProductsByType = async (req, res) => {
+// function for products by brand
+const getProductsByBrand = async (req, res) => {
   try {
-    const { type } = req.query;
+    const { brand } = req.query;
 
-    if (!type) {
-      return res.status(400).json({ message: "Missing type in query" });
+    if (!brand) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Brand is required in query" });
     }
 
-    const products = await productModel.find({ type });
-    res.json(products);
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err });
+    const products = await productModel.find({ brand });
+    res.json({ success: true, products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-
-export { listProducts, addProduct, removeProduct, singleProduct, getProductsByType };
+export {
+  listProducts,
+  addProduct,
+  removeProduct,
+  singleProduct,
+  getProductsByBrand,
+};

@@ -24,7 +24,7 @@ const List = ({ token }) => {
   const removeProduct = async (id) => {
     try {
       const response = await axios.post(
-        backendUrl + "/api/product/remove",
+        backendUrl + "/api/products/remove",
         { id },
         { headers: { token } }
       );
@@ -65,11 +65,12 @@ const List = ({ token }) => {
           >
             <img className="w-12" src={item.image?.[0]} alt="Product" />
             <p>{item.name}</p>
-            <p>{item.category}</p>
+            <p>{item.subCategory}</p>
             <p>
               {currency}
               {item.price}
             </p>
+            {/* <p>{item.sizes}</p> */}
             <p
               onClick={() => removeProduct(item._id)}
               className="text-right md:text-center cursor-pointer text-lg"

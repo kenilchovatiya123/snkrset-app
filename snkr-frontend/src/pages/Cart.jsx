@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
-import Title from "../components/shared/Title";
+import Title from "../components/layout/Title";
 import { assets } from "../assets/assets";
 import CartTotal from "../components/product/CartTotal";
 
@@ -12,17 +12,23 @@ const Cart = () => {
   useEffect(() => {
     if (products.length > 0) {
       const tempData = [];
-      for (const items in cartItems) {
-        for (const item in cartItems[items]) {
-          if (cartItems[items][item] > 0) {
-            tempData.push({
-              _id: items,
-              size: item,
-              quantity: cartItems[items][item],
-            });
+
+      for (const itemId in cartItems) {
+        for (const size in cartItems[itemId]) {
+          if (cartItems[itemId][size] > 0) {
+            const matchedProduct = products.find((p) => p._id === itemId);
+
+            if (matchedProduct) {
+              tempData.push({
+                _id: itemId,
+                size: size,
+                quantity: cartItems[itemId][size],
+              });
+            }
           }
         }
       }
+
       setCartData(tempData);
     }
   }, [cartItems, products]);
@@ -39,6 +45,12 @@ const Cart = () => {
             (product) => product._id === item._id
           );
 
+          // Skip rendering if productData is not found
+          if (!productData) {
+            console.warn("Product not found for cart item:", item);
+            return null;
+          }
+
           return (
             <div
               key={index}
@@ -47,7 +59,7 @@ const Cart = () => {
               <div className="flex items-start gap-6">
                 <img
                   className="w-16 sm:w-20"
-                  src={productData.image[0]}
+                  src={productData.image?.[0] || ""}
                   alt=""
                 />
                 <div>
