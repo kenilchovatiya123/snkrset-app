@@ -1,12 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Title = ({ text1, text2 }) => {
   return (
-    <div className="items-center pb-4">
-      <p className="text-gray-500">
-        {text1} <span className="text-gray-700 font-medium">{text2}</span>
-      </p>
-      {/* <p className='w-8 sm:w-12 h-[10px] sm:h-[2px] bg-gray-700'></p> */}
+    <div className="sm:px-6 px-2 py-4">
+      <div className="text-sm text-gray-600 space-x-1">
+        <Link to="/" className="hover:underline text-black">
+          Home
+        </Link>
+        <span>{">"}</span>
+        <span>{text1}</span>
+        <span>{">"}</span>
+        <span className="font-medium text-black">{text2}</span>
+      </div>
     </div>
   );
 };

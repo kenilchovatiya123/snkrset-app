@@ -37,7 +37,7 @@ import contact_img from "./contact_img.png";
 import razorpay_logo from "./razorpay_logo.png";
 import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
-import filter_icon from './filter_icon.png'
+import filter_icon from './filter.svg'
 import down_arrow_icon from './down-arrow.svg'
 import close_icon from './close.svg'
 export const assets = {

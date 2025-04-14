@@ -13,7 +13,6 @@ const QuickviewModal = ({ product, onClose }) => {
     if (matched) {
       setFullProduct(matched);
 
-      // Handle stringified sizes
       if (typeof matched.sizes === "string") {
         try {
           const parsed = JSON.parse(matched.sizes);
@@ -31,8 +30,8 @@ const QuickviewModal = ({ product, onClose }) => {
   if (!fullProduct) return null;
 
   return (
-    <div className="fixed inset-0 z-50 backdrop-blur-none backdrop-opacity-20 bg-white/70 flex justify-center items-center">
-      <div className="bg-white w-full max-w-4xl rounded-md p-4 sm:flex relative shadow-lg">
+    <div className="fixed inset-0 z-50 backdrop-blur-none backdrop-opacity-20 bg-white/70 flex justify-center items-center p-4">
+      <div className="bg-white w-full max-w-4xl rounded-md p-4 flex flex-col sm:flex-row relative shadow-lg max-h-[80vh] overflow-y-auto">
         {/* Close Icon */}
         <button
           onClick={onClose}
@@ -42,7 +41,7 @@ const QuickviewModal = ({ product, onClose }) => {
         </button>
 
         {/* Left: Image */}
-        <div className="w-full sm:w-1/2 flex items-center justify-center">
+        <div className="w-full sm:w-1/2 flex items-center justify-center mb-4 sm:mb-0">
           <img
             src={fullProduct.image[0]}
             alt={fullProduct.name}
@@ -51,7 +50,7 @@ const QuickviewModal = ({ product, onClose }) => {
         </div>
 
         {/* Right: Info */}
-        <div className="w-full sm:w-1/2 mt-4 sm:mt-0 sm:ml-6 flex flex-col justify-center">
+        <div className="w-full sm:w-1/2 sm:ml-6 flex flex-col justify-center">
           <h2 className="text-lg font-medium uppercase">{fullProduct.name}</h2>
           <p className="text-md capitalize text-gray-600 mt-1">
             {fullProduct.sub_name}
@@ -69,7 +68,7 @@ const QuickviewModal = ({ product, onClose }) => {
                 <button
                   key={index}
                   onClick={() => setSelectedSize(size)}
-                  className={`px-3 py-1 border rounded ${
+                  className={`px-3 py-1 border rounded transition ${
                     selectedSize === size
                       ? "bg-black text-white"
                       : "bg-gray-100 text-gray-700"
@@ -81,18 +80,35 @@ const QuickviewModal = ({ product, onClose }) => {
             </div>
           </div>
 
-          {/* Add to Cart */}
-          <button
-            className="mt-6 px-4 py-2 bg-black text-white rounded hover:bg-gray-900 transition"
-            onClick={() => {
-              if (selectedSize) {
-                addToCart(fullProduct._id, selectedSize);
-                onClose();
-              }
-            }}
-          >
-            {selectedSize ? "ADD TO CART" : "SELECT SIZE"}
-          </button>
+          {/* Buttons Row */}
+          <div className="mt-6 flex gap-4 flex-col sm:flex-row">
+            <button
+              className={`flex-1 px-4 py-2 rounded text-sm border ${
+                selectedSize
+                  ? "bg-gray-100 text-gray-700 border-gray-300"
+                  : "bg-black text-white"
+              }`}
+              disabled={selectedSize}
+            >
+              SELECT SIZE
+            </button>
+            <button
+              className={`flex-1 px-4 py-2 rounded text-sm transition ${
+                selectedSize
+                  ? "bg-black text-white hover:bg-gray-900"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+              onClick={() => {
+                if (selectedSize) {
+                  addToCart(fullProduct._id, selectedSize);
+                  onClose();
+                }
+              }}
+              disabled={!selectedSize}
+            >
+              ADD TO CART
+            </button>
+          </div>
         </div>
       </div>
     </div>

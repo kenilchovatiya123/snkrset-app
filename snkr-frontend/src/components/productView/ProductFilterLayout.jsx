@@ -3,12 +3,12 @@ import { ShopContext } from "../../context/ShopContext"; // Adjust the path if n
 import ProductGrid from "../productView/ProductGrid";
 import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets";
+import Title from "../layout/Title";
 
 const ProductFilterLayout = ({ title, products }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(products);
-
 
   const toggleFilter = () => setShowFilter(!showFilter);
   const toggleSortMenu = () => setShowSortMenu(!showSortMenu);
@@ -31,28 +31,20 @@ const ProductFilterLayout = ({ title, products }) => {
   return (
     <div className="relative">
       {/* Top Filter Bar */}
-      <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+      <div className="flex flex-row justify-between items-center px-4 sm:px-6 py-4 border-b border-gray-200 gap-4">
         {/* Breadcrumbs */}
-        <div className="text-sm text-gray-600 space-x-2">
-          <Link to="/" className="hover:underline text-black">
-            Home
-          </Link>
-          <span>{">"}</span>
-          <span>Sneakers</span>
-          <span>{">"}</span>
-          <span className="font-medium text-black">Air Jordan</span>
-        </div>
+        <Title text1="Sneakers" text2={title} />
 
         {/* Sort + Filter */}
         <div className="flex items-center gap-6 text-sm text-gray-800 relative">
           {/* Sort Dropdown */}
-          <div className="relative">
+          <div className="relative hidden sm:block">
             <button
               onClick={toggleSortMenu}
               className="flex items-center gap-1"
             >
               Latest
-              <img src={assets.down_arrow_icon} className="w-6" alt="" />
+              <img src={assets.down_arrow_icon} className="w-6" alt="sort" />
             </button>
             {showSortMenu && (
               <div className="absolute right-0 mt-2 bg-white shadow-md border rounded-md w-48 z-10">
@@ -75,8 +67,17 @@ const ProductFilterLayout = ({ title, products }) => {
           </div>
 
           {/* View Filters */}
-          <button onClick={toggleFilter} className="flex items-center gap-1">
-            <span className="material-icons text-base">View Filters</span>
+          <button
+            onClick={toggleFilter}
+            className="flex items-center gap-1 sm:gap-2"
+            title="Filters"
+          >
+            <img
+              src={assets.filter_icon}
+              alt="Filter"
+              className="w-6 h-6 sm:w-5 sm:h-5"
+            />
+            <span className="hidden sm:inline">View Filters</span>
           </button>
         </div>
       </div>
