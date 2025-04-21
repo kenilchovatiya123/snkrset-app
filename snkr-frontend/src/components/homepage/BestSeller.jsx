@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../../context/ShopContext"
-import Title from "../layout/Title";
+import { ShopContext } from "../../context/ShopContext";
+import { Link } from "react-router-dom";
 import ProductItem from "../product/ProductItem";
 
 const BestSeller = () => {
@@ -9,28 +9,31 @@ const BestSeller = () => {
 
   useEffect(() => {
     const bestProduct = products.filter((item) => item.bestseller);
-    setBestSeller(bestProduct.slice(0, 5));
+    setBestSeller(bestProduct.slice(0, 4));
   }, [products]);
 
   return (
-    <div className="my-4 mx-4 sm:my-6 sm:mx-6">
-      <div className="text-left py-2 text-lg">
-        <Title text1={"BEST"} text2={"SELLERS"} />
+    <section className="my-10 px-4">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-[18px] font-medium">BEST SELLER</h2>
+        <p className="text-[14px] text-white hover:underline bg-black px-4 py-2 rounded-sm">
+          <Link to="/">View All</Link>
+        </p>
       </div>
-      {/* Rendering Products */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 gap-y-2 sm:gap-y-4">
-        {bestSeller.map((item, index) => (
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+        {bestSeller.map((item) => (
           <ProductItem
-            key={index}
-            id={item._id}
-            image={item.image}
+            key={item._id}
             name={item.name}
             sub_name={item.sub_name}
+            id={item._id}
             price={item.price}
+            image={item.image}
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

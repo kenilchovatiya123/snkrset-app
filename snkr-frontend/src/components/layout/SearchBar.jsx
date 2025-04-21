@@ -7,7 +7,7 @@ const SearchBar = () => {
       <div className="relative w-full">
         <div className="absolute inset-y-0 left-0 flex items-center px-2">
           <img
-            src={assets.search_icon}
+            src={assets.searchIcon}
             className="w-5 text-gray-500"
             alt="search"
           />

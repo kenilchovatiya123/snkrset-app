@@ -23,6 +23,8 @@ a.active hr {
   }
 } */
 
-p {
+p,
+h2 {
   font-family: Helvetica;
+  text-transform: uppercase;
 }

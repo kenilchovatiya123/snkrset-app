@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ShopContext } from "../../context/ShopContext"; // Adjust the path if necessary
-import ProductGrid from "../productView/ProductGrid";
+import ProductGrid from "../../components/productView/ProductGrid";
 import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import Title from "../layout/Title";

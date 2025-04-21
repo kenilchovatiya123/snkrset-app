@@ -37,7 +37,7 @@ const QuickviewModal = ({ product, onClose }) => {
           onClick={onClose}
           className="absolute top-3 right-3 text-xl font-bold text-gray-500 hover:text-black"
         >
-          <img src={assets.close_icon} className="w-6" alt="Close" />
+          <img src={assets.closeIcon} className="w-6" alt="Close" />
         </button>
 
         {/* Left: Image */}
@@ -58,6 +58,12 @@ const QuickviewModal = ({ product, onClose }) => {
           <p className="text-md text-gray-800 mt-1">
             {currency}
             {fullProduct.price}
+            {fullProduct.originalPrice && (
+              <span className="line-through text-sm text-gray-500">
+                {currency}
+                {fullProduct.originalPrice}
+              </span>
+            )}
           </p>
 
           {/* Sizes */}

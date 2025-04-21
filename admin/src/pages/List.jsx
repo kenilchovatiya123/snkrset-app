@@ -1,15 +1,21 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
+import debounce from "lodash.debounce";
+import { Link } from "react-router-dom";
 
-const List = ({ token }) => {
+const itemsPerPage = 10;
+
+const ProductList = ({ token }) => {
   const [list, setList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(backendUrl + "/api/products/list");
-      // console.log(response.data);
+      const response = await axios.get(
+        `${backendUrl}/api/products/list?search=${searchTerm}`
+      );
       if (response.data.success) {
         setList(response.data.products);
       } else {
@@ -42,46 +48,102 @@ const List = ({ token }) => {
 
   useEffect(() => {
     fetchList();
-  }, []);
+  }, [searchTerm]);
+
+  const handleSearch = debounce((value) => {
+    setSearchTerm(value);
+    fetchList(); // Re-fetch list based on search term
+  }, 500);
 
   return (
-    <>
-      <p className="mb-2">All Products List</p>
-      <div className="flex flex-col gap-2">
-        {/* List Table Title */}
-        <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm">
-          <b>Image</b>
-          <b>Name</b>
-          <b>Category</b>
-          <b>Price</b>
-          <b className="text-center">Action</b>
+    <div className="flex w-full min-h-screen">
+      <div className="flex-1 bg-gray-50">
+        {/* Page Header Section */}
+        <div className="flex flex-wrap items-center justify-between px-6 py-4 gap-3">
+          <h2 className="text-lg font-semibold text-gray-800">Product List</h2>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="border px-3 py-1 rounded-md text-sm"
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+            {/* Just UI dropdowns, no functionality */}
+            <select className="border px-2 py-1 rounded text-sm">
+              <option value="">All Stock</option>
+              <option value="low">Low Stock</option>
+              <option value="full">Full Stock</option>
+            </select>
+
+            <select className="border px-2 py-1 rounded text-sm">
+              <option value="">All Brands</option>
+              <option value="air-jordan">Air Jordan's</option>
+              <option value="dunks">Dunks</option>
+              <option value="yeezy350">Yeezy350</option>
+              <option value="louis-vuitton">Louis Vuitton</option>
+              <option value="dior">Dior</option>
+              <option value="gucci">Gucci</option>
+              <option value="prada">Prada</option>
+            </select>
+
+            <Link to="/add">
+              <button className="bg-purple-600 text-white px-4 py-1 rounded-md text-sm shadow-sm hover:bg-purple-700 transition-all duration-200">
+                Add
+              </button>
+            </Link>
+          </div>
         </div>
 
-        {/* Product List */}
-        {list.map((item, index) => (
+        {/* Table Headings */}
+        <div className="grid grid-cols-7 items-center px-6 py-2 text-sm font-medium text-gray-600 border-b">
+          <span>Image ▼</span>
+          <span>Product Name ▼</span>
+          <span>Brand ▼</span>
+          <span>Price ▼</span>
+          <span>Stock ▼</span>
+          <span>Status ▼</span>
+          <span>Action</span>
+        </div>
+
+        {/* Table Rows */}
+        {list.map((item, i) => (
           <div
-            className="grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm"
-            key={index}
+            key={i}
+            className="grid grid-cols-7 items-center px-6 py-4 text-sm bg-white border-b hover:bg-gray-50"
           >
-            <img className="w-12" src={item.image?.[0]} alt="Product" />
-            <p>{item.name}</p>
-            <p>{item.subCategory}</p>
-            <p>
+            <div className="w-12 h-12 bg-gray-200 rounded-md overflow-hidden">
+              {item.image?.[0] && (
+                <img
+                  src={item.image[0]}
+                  alt="product"
+                  className="object-cover w-full h-full"
+                />
+              )}
+            </div>
+            <span className="text-gray-800">{item.name}</span>
+            <span className="text-gray-600">{item.brand}</span>
+            <span className="text-gray-600">
               {currency}
               {item.price}
-            </p>
-            {/* <p>{item.sizes}</p> */}
-            <p
-              onClick={() => removeProduct(item._id)}
-              className="text-right md:text-center cursor-pointer text-lg"
-            >
-              X
-            </p>
+            </span>
+            <span className="text-green-600">{item.stockStatus}</span>
+            <span className="text-blue-500">Active</span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => removeProduct(item._id)}
+                className="text-red-500 hover:underline text-sm"
+              >
+                Delete
+              </button>
+              <button className="text-blue-500 hover:underline text-sm">
+                Edit
+              </button>
+            </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
-export default List;
+export default ProductList;

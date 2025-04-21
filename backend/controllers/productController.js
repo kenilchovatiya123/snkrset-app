@@ -4,8 +4,16 @@ import productModel from "../models/productModel.js";
 // function for add product
 const addProduct = async (req, res) => {
   try {
-    const { name, sub_name, price, subCategory, brand, sizes, bestseller } =
-      req.body;
+    const {
+      name,
+      sub_name,
+      price,
+      subCategory,
+      brand,
+      sizes,
+      bestseller,
+      description,
+    } = req.body;
 
     const image1 = req.files.image1 && req.files.image1[0];
     const image2 = req.files.image2 && req.files.image2[0];
@@ -30,10 +38,13 @@ const addProduct = async (req, res) => {
       sub_name,
       brand,
       price: Number(price),
+      originalPrice: req.body.originalPrice, // NEW
+      stockStatus: req.body.stockStatus, // NEW
       subCategory,
       bestseller: bestseller === "true" ? true : false,
       sizes: JSON.parse(sizes),
       image: imagesUrl,
+      description,
       date: Date.now(),
     };
 
@@ -48,14 +59,38 @@ const addProduct = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message }); // ✅ Return here as well
   }
 };
+
 // function for list product
 const listProducts = async (req, res) => {
   try {
-    const products = await productModel.find({});
-    res.json({ success: true, products });
+    const { page = 1, limit = 10, search } = req.query;
+
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    const query = {};
+
+    // Search by product name (case-insensitive)
+    if (search) {
+      query.name = { $regex: search, $options: "i" };
+    }
+
+    const products = await productModel
+      .find(query)
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    const totalCount = await productModel.countDocuments(query);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.json({
+      success: true,
+      products,
+      totalCount,
+      totalPages,
+      currentPage: parseInt(page),
+    });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
+    console.error(error);
+    res.json({ success: false, message: "Failed to fetch products" });
   }
 };
 
