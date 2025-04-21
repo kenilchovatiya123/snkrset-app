@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* Menu icon for small screen sidebar */}
         <img
           onClick={() => setVisible((prev) => !prev)}
-          src={assets.menu_icon}
+          src={assets.navMenu}
           className="w-8 sm:w-12 cursor-pointer lg:hidden"
           alt=""
         />
@@ -47,7 +47,7 @@ const Navbar = () => {
                 alt=""
                 className="sm:w-[38px] w-[22px] rounded"
               />
-              <h1 className="sm:text-[44px] text-[24px] font-bold tracking-[-2px]">
+              <h1 className="sm:text-[44px] text-[24px] font-bold tracking-[-2px] sm:tracking-[-3px]">
                 SNKRSET
               </h1>
             </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
         <div
           className={`absolute left-0 w-full bg-white overflow-hidden z-20 transition-all duration-500 ease-in-out ${
             visible ? "h-screen" : "h-0"
-          } top-[64px] sm:top-[88px]`}
+          } top-[88px] sm:top-[112px]`}
         >
           <div className="flex flex-col text-gray-700 text-[17px] font-medium px-4 pt-4">
             {/* SALE */}
@@ -75,7 +75,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between py-2">
               <p>Sneakers</p>
               <img
-                src={assets.down_arrow_icon}
+                src={assets.downArrow}
                 onClick={() =>
                   setOpenMenu(openMenu === "sneakers" ? "" : "sneakers")
                 }
@@ -129,7 +129,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between py-2">
               <p>Apparels</p>
               <img
-                src={assets.down_arrow_icon}
+                src={assets.downArrow}
                 onClick={() =>
                   setOpenMenu(openMenu === "apparels" ? "" : "apparels")
                 }
@@ -168,7 +168,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between py-2">
               <p>Accessories</p>
               <img
-                src={assets.down_arrow_icon}
+                src={assets.downArrow}
                 onClick={() =>
                   setOpenMenu(openMenu === "accessories" ? "" : "accessories")
                 }
@@ -211,7 +211,7 @@ const Navbar = () => {
 
         {/* Continue with rest of Navbar... */}
         <div className="flex items-center font-medium">
-          <ul className="hidden lg:flex gap-6 text-sm text-gray-700">
+          <ul className="hidden lg:flex gap-6 text-sm text-neutral-900">
             <NavLink
               to="/sale"
               className="flex items-center gap-1 text-red-600"
@@ -229,7 +229,7 @@ const Navbar = () => {
               </NavLink>
 
               {showSneakersDropdown && (
-                <div className="absolute top-[100%] left-0 w-[250px] bg-white shadow-lg rounded-md p-4 text-sm z-30">
+                <div className="absolute top-[100%] left-0 w-[250px] bg-white shadow-lg p-4 text-sm z-30">
                   <div className="text-gray-700 flex flex-col gap-1">
                     <NavLink to="/sneakers/air-jordans">Air Jordan's</NavLink>
                     <NavLink to="/sneakers/sb-dunks">SB Dunks</NavLink>
@@ -291,7 +291,7 @@ const Navbar = () => {
             <div className="relative hidden lg:block">
               <div className="absolute inset-y-0 start-0 flex items-center px-2">
                 <img
-                  src={assets.search_icon}
+                  src={assets.searchIcon}
                   className="w-6 text-gray-500"
                   alt="search"
                 />
@@ -309,7 +309,7 @@ const Navbar = () => {
             <div className="group">
               <img
                 onClick={() => (token ? null : navigate("/login"))}
-                src={assets.user_icon}
+                src={assets.userProfile}
                 alt="user"
                 className="w-8 cursor-pointer"
               />
@@ -340,7 +340,7 @@ const Navbar = () => {
             </div>
 
             <Link to="/cart" className="relative">
-              <img src={assets.cart_icon} className="w-8" alt="cart" />
+              <img src={assets.shoppingCart} className="w-8" alt="cart" />
               <p className="absolute right-[-5px] top-[1px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
                 {getCartCount()}
               </p>

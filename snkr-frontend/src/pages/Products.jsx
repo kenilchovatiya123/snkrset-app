@@ -28,22 +28,13 @@ const Products = () => {
   }, [productId, products]);
 
   return productData ? (
-    <div className="border-t pt-10 transition-opacity ease-in duration-500 opacity-100">
+    <div className="pt-10 transition-opacity ease-in duration-500 opacity-100">
       {/* Product Data */}
       <div className="flex gap-12 flex-col sm:flex-row">
         {/* Product Images */}
-        <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className="flex sm:flex-col overflow-x-auto justify-between sm:justify-normal sm:w-[18.7%] w-full">
-            {productData.image.map((item, index) => (
-              <img
-                onClick={() => setImage(item)}
-                src={item}
-                key={index}
-                className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
-              />
-            ))}
-          </div>
-          <div className="w-full sm:w-[80%]">
+        <div className="flex-2 flex flex-col-reverse sm:flex-row">
+          <div className="flex sm:flex-col overflow-x-auto justify-between sm:justify-normal sm:w-[18.7%] w-full"></div>
+          <div className="w-full sm:w-[70%]">
             <img className="w-full h-auto" src={image} alt="" />
           </div>
         </div>
@@ -54,21 +45,37 @@ const Products = () => {
           <h4 className="font-medium text-xl mt-1 capitalize">
             {productData.sub_name}
           </h4>
-          <h1 className="font-light text-lg mt-1">
-            {currency}
-            {productData.price}
-          </h1>
-          <div className="flex items-center gap-1 mt-4">
-            <img src={assets.star_icon} alt="" className="w-3.5"></img>
-            <img src={assets.star_icon} alt="" className="w-3.5"></img>
-            <img src={assets.star_icon} alt="" className="w-3.5"></img>
-            <img src={assets.star_icon} alt="" className="w-3.5"></img>
-            <img src={assets.star_dull_icon} alt="" className="w-3.5"></img>
-            <p className="pl-2">(122)</p>
+
+          <div className="mt-1 flex items-center gap-2">
+            <h1 className="font-light text-lg">
+              {currency}
+              {productData.price}
+            </h1>
+            {productData.originalPrice && (
+              <span className="line-through text-sm text-gray-500">
+                {currency}
+                {productData.originalPrice}
+              </span>
+            )}
           </div>
+
+          {productData.stockStatus && (
+            <div className="mt-2">
+              <span
+                className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
+                  productData.stockStatus === "low stock"
+                    ? "bg-red-100 text-red-600"
+                    : "bg-green-100 text-green-600"
+                }`}
+              >
+                {productData.stockStatus}
+              </span>
+            </div>
+          )}
+
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               {productData.sizes.map((item, index) => (
                 <button
                   onClick={() => setSize(item)}
@@ -82,6 +89,7 @@ const Products = () => {
               ))}
             </div>
           </div>
+
           <div className="flex flex-row gap-2">
             <button
               onClick={() => addToCart(productData._id, size)}
@@ -94,37 +102,50 @@ const Products = () => {
             </button>
           </div>
           <hr className="mt-8 sm:w-4/5" />
-          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
-            <p>100% Original product.</p>
-            <p>Cash on delivery is available on this product.</p>
-            <p>100% Polyamide</p>
+          <div className="mt-4 text-sm text-gray-600">
+            <p>{productData.description}</p>
           </div>
         </div>
       </div>
-      {/* <PrivacyPolicy /> */}
 
-      {/* Description & Review Section */}
-      <div className="mt-20">
-        <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm">Reviews (10)</p>
-        </div>
-        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-600">
-          <p>
-            An e-commerce website is an online platform that facilitates the
-            buying and selling of products or services over the internet. It
-            serves as a virtual marketplace where businesses and individuals can
-            showcase their products, interact with customers, and conduct
-            transactions without the need for a physical presence. E-commerce
-            websites have gained immense popularity due to their convenience,
-            accessibility, and the global reach they offer.
-          </p>
-          <p>
-            E-commerce websites typically display products or services along
-            with detailed descriptions, images, prices, and any available
-            variations (e.g., sizes, colors). Each product usually has its own
-            dedicated page with relevant information.
-          </p>
+      {/* Review Grid Section */}
+      <div className="mt-10 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-lg font-semibold mb-6">
+          What Customers Are Saying
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            {
+              name: "Amelia R.",
+              rating: 5,
+              comment:
+                "Super fast shipping and the product is top-notch. Love it!",
+            },
+            {
+              name: "Ethan M.",
+              rating: 4,
+              comment: "Good quality but I wish it came in more color options.",
+            },
+            {
+              name: "Sophia L.",
+              rating: 5,
+              comment: "These are my go-to sneakers now. Stylish and comfy!",
+            },
+            {
+              name: "Noah D.",
+              rating: 4,
+              comment: "Decent shoes, but sizing runs a little small.",
+            },
+          ].map((review, idx) => (
+            <div key={idx} className="border p-4 rounded shadow-sm bg-neutral-100">
+              <p className="font-medium text-sm mb-2">{review.name}</p>
+              <p className="text-yellow-500 text-xs mb-2">
+                {"⭐".repeat(review.rating)}
+                {"☆".repeat(5 - review.rating)}
+              </p>
+              <p className="text-sm text-gray-600">{review.comment}</p>
+            </div>
+          ))}
         </div>
       </div>
 

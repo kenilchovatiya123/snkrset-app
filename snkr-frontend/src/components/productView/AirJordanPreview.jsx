@@ -8,21 +8,18 @@ const AirJordanPreview = () => {
 
   const previewProducts = products
     .filter((product) => product.brand === "Air Jordan's")
-    .slice(0, 5); // Show only first 5
+    .slice(0, 4); // Show only first 4
 
   return (
     <section className="my-10 px-4">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg md:text-xl font-medium">AIR JORDAN'S</h2>
-        <Link
-          to="/sneakers/air-jordans"
-          className="text-sm text-blue-600 hover:underline"
-        >
-          View All
-        </Link>
+        <h2 className="text-[18px] font-medium">AIR JORDAN'S</h2>
+        <p className="text-[14px] text-white hover:underline bg-black px-4 py-2 rounded-sm">
+          <Link to="/sneakers/air-jordans">View All</Link>
+        </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-y-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {previewProducts.map((item) => (
           <ProductItem
             key={item._id}

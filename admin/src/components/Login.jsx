@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { backendUrl } from "../App";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const onSubmitHnadler = async (e) => {
     try {
@@ -16,6 +18,8 @@ const Login = ({ setToken }) => {
       });
       if (response.data.success) {
         setToken(response.data.token);
+        localStorage.setItem("token", response.data.token); // Store token
+        navigate("/"); // Redirect to dashboard or home
       } else {
         toast.error(response.data.message);
       }

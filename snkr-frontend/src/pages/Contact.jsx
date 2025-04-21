@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Title from "../components/layout/Title";
-import NewLetterBox from "../components/homepage/NewLetterBox";
+import NewsLetter from "../components/homepage/NewsLetter";
 
 const Contact = () => {
   //   const onSubmitHandler = async (event) => {
@@ -44,7 +44,7 @@ const Contact = () => {
         </button>
       </form>
       <div className="pt-10">
-        <NewLetterBox />
+        <NewsLetter/>
       </div>
     </div>
   );

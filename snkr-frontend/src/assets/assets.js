@@ -1,5 +1,3 @@
-// import { v4 as uuidv4 } from "uuid";
-
 import img_1 from "./amiri-arts-district-white-t-shirt.png";
 import img_2 from "./Burberry-Short-Sleeve-Poplin-Check-Shirt.png";
 import img_3 from "./chrome-hearts-stadium-mesh-red-tshirt.png";
@@ -13,56 +11,57 @@ import img_10 from "./louis-vuitton-monogram-bandana-shirt.png";
 import img_11 from "./louis-vuitton-monogram-denim-shirt.png";
 import img_12 from "./prada-padded-re-nylon-black-gilet-jacket.png";
 
-// sneakers
-import img_13 from "./louis-vuitton-x-nike-air-force-1.png"
-import img_14 from "./preloved---air-jordan-1-x-off-wh.png"
-import img_15 from "./air-jordan-1-x-off-white-retro-h.png"
+// main-brands section
+import represent_img from "./mainbrands/represent.jpg";
+import brokenplanet_img from "./mainbrands/brokenplanet.jpeg";
+import essentials_img from "./mainbrands/essentials.jpg";
 
+// carousels section
+import carousel_1 from "./carousel/1.png";
+import carousel_2 from "./carousel/2.png";
+import carousel_3 from "./carousel/3.png";
+
+// sharp icons
+import navMenu from "./sharp_icons/menu.svg";
+import userProfile from "./sharp_icons/user.svg";
+import shoppingCart from "./sharp_icons/cart.svg";
+import searchIcon from "./sharp_icons/search.svg";
+import downArrow from "./sharp_icons/down-arrow.svg";
+import fastShipping from "./sharp_icons/shipping.svg";
+import paymentSecurity from "./sharp_icons/security.svg";
+import freeShipping from "./sharp_icons/parcel.svg";
+import closeIcon from "./sharp_icons/close.svg";
+
+// website main images
 import logo from "./logo.jpg";
 import hero_img from "./hero_img.png";
 import hero_img_mobile_screen from "./hero_img_mobile_screen.png";
-import cart_icon from "./cart.svg";
-import bin_icon from "./bin_icon.png";
-import dropdown_icon from "./dropdown_icon.png";
-import fast_delivery_icon from "./fast_delivery_icon.png";
-import user_icon from "./user.svg";
-import free_shipping_icon from "./free_shipping_icon.png";
-import search_icon from "./search.svg";
-import star_dull_icon from "./star_dull_icon.png";
-import star_icon from "./star_icon.png";
-import secure_payment_icon from "./secure_payment_icon.png";
-import menu_icon from "./menu.svg";
-import about_img1 from "./about_store.jpg";
-import contact_img from "./contact_img.png";
-import razorpay_logo from "./razorpay_logo.png";
-import stripe_logo from "./stripe_logo.png";
-import cross_icon from "./cross_icon.png";
-import filter_icon from './filter.svg'
-import down_arrow_icon from './down-arrow.svg'
-import close_icon from './close.svg'
+
 export const assets = {
   logo,
   hero_img,
   hero_img_mobile_screen,
-  cart_icon,
-  dropdown_icon,
-  fast_delivery_icon,
-  secure_payment_icon,
-  free_shipping_icon,
-  user_icon,
-  search_icon,
-  star_dull_icon,
-  star_icon,
-  bin_icon,
-  menu_icon,
-  about_img1,
-  contact_img,
-  razorpay_logo,
-  stripe_logo,
-  cross_icon,
-  filter_icon,
-  down_arrow_icon,
-  close_icon
+
+  // mainBrand img
+  represent_img,
+  brokenplanet_img,
+  essentials_img,
+
+  // carousel img
+  carousel_1,
+  carousel_2,
+  carousel_3,
+
+  // sharp icons
+  navMenu,
+  userProfile,
+  shoppingCart,
+  searchIcon,
+  downArrow,
+  fastShipping,
+  paymentSecurity,
+  freeShipping,
+  closeIcon,
 };
 
 export const products = [
@@ -219,49 +218,6 @@ export const products = [
     category: "Mens",
     subCategory: "Topwear",
     sizes: ["XS", "S", "M", "L", "XL"],
-    date: Date.now(),
-    bestseller: true,
-  },
-];
-
-export const productsf = [
-  {
-    _id: "aaaam",
-    name: "louis vuitton x nike",
-    sub_name: "amiri Louis Vuitton x Nike Air Force 1 Low Metallic Gold",
-    // description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt.",
-    price: 13999,
-    image: [img_13],
-    category: "Mens",
-    subCategory: "Footwear",
-    sizes: ["UK7", "UK8", "UK9", "UK10", "UK10.5"],
-    date: Date.now(),
-    bestseller: true,
-  },
-  {
-    _id: "aaaan",
-    name: "air jordan",
-    sub_name: "Air Jordan 1 x Off-White 1 Retro High OG Chicago ",
-    // description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt.",
-    price: 13999,
-    image: [img_14],
-    category: "Mens",
-    subCategory: "Footwear",
-    sizes: ["UK7", "UK8", "UK9", "UK10", "UK10.5"],
-    type: "new",
-    date: Date.now(),
-    bestseller: true,
-  },
-  {
-    _id: "aaaao",
-    name: "air jordan",
-    sub_name: "Air Jordan 1 X Off-White Retro High UNC University Blue",
-    // description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt.",
-    price: 13999,
-    image: [img_15],
-    category: "Mens",
-    subCategory: "Footwear",
-    sizes: ["UK7", "UK8", "UK9", "UK10", "UK10.5"],
     date: Date.now(),
     bestseller: true,
   },

@@ -7,7 +7,7 @@ import Contact from "./pages/Contact";
 import ProductDetails from "./pages/Products";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
-import PlaceOrder from "./pages/PlaceOrder";
+import PlaceOrder from "./pages/PlaceOrder"; 
 import Orders from "./pages/Orders";
 import Footer from "./components/layout/Footer";
 import SearchBar from "./components/layout/SearchBar";
@@ -19,15 +19,16 @@ import AirJordans from "./pages/sneakers/AirJordans";
 import Dior from "./pages/sneakers/Dior";
 import SbDunks from "./pages/sneakers/SbDunks";
 import Shirts from "./pages/apparels/Shirts";
+import AnnouncementBar from "./components/layout/AnnouncementBar";
 const App = () => {
   return (
     <div className="w-full">
       <ToastContainer />
+      <AnnouncementBar />
       <Navbar />
       <div className="lg:hidden">
         <SearchBar />
       </div>
-
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />

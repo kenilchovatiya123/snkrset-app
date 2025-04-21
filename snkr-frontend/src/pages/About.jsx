@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "../components/layout/Title";
 import { assets } from "../assets/assets";
-import NewLetterBox from "../components/homepage/NewLetterBox";
+import NewsLetter from "../components/homepage/NewsLetter";
 
 const About = () => {
   return (
@@ -40,7 +40,7 @@ const About = () => {
         </div>
       </div>
       <div className="pt-10">
-        <NewLetterBox />
+       <NewsLetter/>
       </div>
     </div>
   );

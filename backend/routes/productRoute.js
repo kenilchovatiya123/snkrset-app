@@ -8,6 +8,7 @@ import {
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
 import adminAuth from "../middleware/adminAuth.js";
+import productModel from "../models/productModel.js";
 
 const productRouter = express.Router();
 
@@ -24,7 +25,34 @@ productRouter.post(
 );
 productRouter.post("/remove", adminAuth, removeProduct);
 productRouter.post("/single", singleProduct);
-productRouter.get("/list", listProducts);
+productRouter.get("/list", async (req, res) => {
+  try {
+    const { search = "", category = "", brand = "" } = req.query;
+
+    const query = {};
+
+    if (search) {
+      query.name = { $regex: search, $options: "i" };
+    }
+    if (category) {
+      query.category = category;
+    }
+    if (brand) {
+      query.brand = brand;
+    }
+
+    // Fetch all products without pagination
+    const products = await productModel.find(query);
+
+    res.json({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 productRouter.get("/filter-by-brand", getProductsByBrand);
 
 export default productRouter;

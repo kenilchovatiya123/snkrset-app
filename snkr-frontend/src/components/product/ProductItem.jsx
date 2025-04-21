@@ -1,26 +1,28 @@
 import React, { useContext, useState } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import { Link } from "react-router-dom";
-import QuickviewModal from "../../pages/QuickviewModal"; // Adjust the path if needed
+import QuickviewModal from "../../pages/QuickviewModal";
 
 const ProductItem = ({ id, image, name, sub_name, price }) => {
   const { currency } = useContext(ShopContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (e) => {
-    e.preventDefault(); // Prevent link navigation
+    e.preventDefault();
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
-    <div className="relative bg-neutral-100 p-2 sm:p-4 rounded-sm overflow-hidden group cursor-pointer">
-      {/* Product Image with Quickview Hover */}
-      <div className="relative flex justify-center items-center h-36 sm:h-64 overflow-hidden">
+    <div className="relative bg-neutral-100 p-2 sm:p-3 overflow-hidden group cursor-pointer">
+      {/* Image container with aspect ratio */}
+      <div className="relative w-full aspect-[4/5] flex items-center justify-center overflow-hidden">
         <img
-          className="w-auto h-40 md:h-44 sm:h-64 object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
           src={image?.[0]}
+          alt={name || "Product Image"}
+          className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply"
+          loading="lazy"
           srcSet={
             image?.[0]
               ? `
@@ -41,8 +43,6 @@ const ProductItem = ({ id, image, name, sub_name, price }) => {
                 (min-width: 990px) calc((100vw - 130px) / 4), 
                 (min-width: 750px) calc((100vw - 120px) / 3), 
                 calc(50vw - 2.1rem)"
-          alt={name || "Product Image"}
-          loading="lazy"
           width="2048"
           height="2048"
         />
@@ -56,17 +56,17 @@ const ProductItem = ({ id, image, name, sub_name, price }) => {
         </div>
       </div>
 
-      <hr className="text-gray-200 py-2" />
+      <hr className="my-2 border-gray-200" />
 
       {/* Product Details */}
-      <Link className="block" to={`/products/${id}`}>
-        <h4 className="pt-2 pb-1 text-[12px] text-gray-900 font-semibold uppercase">
+      <Link to={`/products/${id}`} className="block">
+        <h4 className="text-xs sm:text-sm font-semibold text-gray-900 uppercase truncate">
           {name}
         </h4>
-        <p className="pb-1 text-[12px] text-gray-900 capitalize max-w-fit">
+        <p className="text-xs sm:text-sm text-gray-800 capitalize truncate">
           {sub_name}
         </p>
-        <p className="text-[14px] text-gray-900">
+        <p className="text-sm sm:text-base text-gray-900 font-medium">
           {currency}
           {price}
         </p>
