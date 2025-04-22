@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
-import { ShopContext } from "../../context/ShopContext"; // Adjust the path if necessary
+import React, { useState } from "react";
 import ProductGrid from "../../components/productView/ProductGrid";
-import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import Title from "../layout/Title";
 
@@ -31,20 +29,39 @@ const ProductFilterLayout = ({ title, products }) => {
   return (
     <div className="relative">
       {/* Top Filter Bar */}
-      <div className="flex flex-row justify-between items-center px-4 sm:px-6 py-4 border-b border-gray-200 gap-4">
+
+      {/* Sort + Filter */}
+      <div className="flex items-center flex-row justify-between w-full px-4 text-sm text-gray-800 relative sm:gap-8 mt-4">
         {/* Breadcrumbs */}
         <Title text1="Sneakers" text2={title} />
+        {/* Small Screen: Latest Left + Filter Right */}
+        <div className="flex w-full justify-between items-center sm:hidden">
+          {/* Latest Sort Button - Left */}
+          <button onClick={toggleSortMenu} className="flex items-center gap-1">
+            <span>Latest</span>
+            <img src={assets.downArrow} className="w-5 h-5" alt="sort" />
+          </button>
 
-        {/* Sort + Filter */}
-        <div className="flex items-center gap-6 text-sm text-gray-800 relative">
+          {/* Filter Button - Right */}
+          <button
+            onClick={toggleFilter}
+            className="flex items-center gap-1"
+            title="Filters"
+          >
+            <img src={assets.filterIcon} alt="Filter" className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Large Screen: Original Layout */}
+        <div className="hidden sm:flex items-center gap-8">
           {/* Sort Dropdown */}
-          <div className="relative hidden sm:block">
+          <div className="relative">
             <button
               onClick={toggleSortMenu}
-              className="flex items-center gap-1"
+              className="flex items-center gap-2"
             >
               Latest
-              <img src={assets.down_arrow_icon} className="w-6" alt="sort" />
+              <img src={assets.downArrow} className="w-4 h-4" alt="sort" />
             </button>
             {showSortMenu && (
               <div className="absolute right-0 mt-2 bg-white shadow-md border rounded-md w-48 z-10">
@@ -69,15 +86,11 @@ const ProductFilterLayout = ({ title, products }) => {
           {/* View Filters */}
           <button
             onClick={toggleFilter}
-            className="flex items-center gap-1 sm:gap-2"
+            className="flex items-center gap-2"
             title="Filters"
           >
-            <img
-              src={assets.filter_icon}
-              alt="Filter"
-              className="w-6 h-6 sm:w-5 sm:h-5"
-            />
-            <span className="hidden sm:inline">View Filters</span>
+            <img src={assets.filterIcon} alt="Filter" className="w-5 h-5" />
+            <span>View Filters</span>
           </button>
         </div>
       </div>

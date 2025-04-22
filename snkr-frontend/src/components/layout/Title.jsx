@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const Title = ({ text1, text2 }) => {
   return (
-    <div className="sm:px-6 px-2 py-4">
-      <div className="text-gray-600 space-x-1 text-[14px] uppercase">
-        <Link to="/" className="hover:underline text-black">
+    <div className="px-2 py-2 hidden sm:block">
+      <div className="text-gray-800 space-x-1 text-[12px] uppercase flex items-center gap-1">
+        <Link to="/" className="hover:underline">
           Home
         </Link>
-        <span>{">"}</span>
-        <span>{text1}</span>
-        <span>{">"}</span>
-        <span className="font-medium text-black">{text2}</span>
+        <p>{">"}</p>
+        <p>{text1}</p>
+        <p>{">"}</p>
+        <p>{text2}</p>
       </div>
     </div>
   );

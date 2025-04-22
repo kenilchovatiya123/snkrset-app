@@ -30,7 +30,7 @@ const Sidebar = () => {
         <nav className="px-4 space-y-2">
           {/* Dashboard Link */}
           <Link
-            to="/admin"
+            to="/dashboard"
             className={`flex items-center gap-3 p-2 rounded-md hover:bg-gray-100 ${
               isActive("/") && "bg-gray-100"
             }`}
@@ -94,7 +94,7 @@ const Sidebar = () => {
             }`}
           >
             <img src={assets.sale_icon} className="w-5 h-5" alt="Sales" />
-            <span>Sales</span>
+            <span>Orders</span>
           </Link>
 
           {/* Customers Section */}

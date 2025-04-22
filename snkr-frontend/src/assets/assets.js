@@ -31,6 +31,7 @@ import fastShipping from "./sharp_icons/shipping.svg";
 import paymentSecurity from "./sharp_icons/security.svg";
 import freeShipping from "./sharp_icons/parcel.svg";
 import closeIcon from "./sharp_icons/close.svg";
+import filterIcon from './sharp_icons/filter.svg'
 
 // website main images
 import logo from "./logo.jpg";
@@ -62,6 +63,7 @@ export const assets = {
   paymentSecurity,
   freeShipping,
   closeIcon,
+  filterIcon
 };
 
 export const products = [

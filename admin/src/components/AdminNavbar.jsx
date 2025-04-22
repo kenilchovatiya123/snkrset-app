@@ -18,7 +18,7 @@ const AdminNavbar = () => {
   };
 
   return (
-    <div className="w-full bg-white shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+    <div className="bg-white shadow-md rounded-2xl p-4 flex items-center justify-between sticky top-0 z-10">
       {/* Left: Page Title */}
       <h1 className="text-xl font-semibold text-gray-800">{getPageTitle()}</h1>
     </div>

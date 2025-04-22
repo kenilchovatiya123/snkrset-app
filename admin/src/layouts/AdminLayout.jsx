@@ -6,6 +6,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import List from "../pages/List";
 import Add from "../pages/Add";
 import Orders from "../pages/Orders";
+import Dashboard from "../pages/Dashboard";
 
 const AdminLayout = ({ token }) => {
   const location = useLocation();
@@ -32,9 +33,11 @@ const AdminLayout = ({ token }) => {
         <div className="mt-6">
           <Routes>
             <Route path="/" element={<List token={token} />} />
+            <Route path="/dashboard" element={<Dashboard token={token} />} />
             <Route path="/list" element={<List token={token} />} />
             <Route path="/add" element={<Add token={token} />} />
             <Route path="/orders" element={<Orders token={token} />} />
+            {/* <Route path="/customers" element={<Customers />} /> */}
           </Routes>
         </div>
       </div>
