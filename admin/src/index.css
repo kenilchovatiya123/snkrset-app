@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Helvetica"),
+    url("../src/assets/fonts/Helvetica/Helvetica.woff") format("woff");
+}
+
 select,input,textarea{
   border: 1px solid #c2c2c2;
   outline-color: #c586a5;
@@ -9,4 +17,19 @@ select,input,textarea{
 .active {
   background-color: #ffebf5;
   border-color: #c586a5;
+}
+
+p,
+h2,
+h3,
+span,
+th,
+td,
+label {
+  font-family: Helvetica;
+  /* text-transform: uppercase; */
+}
+
+h2{
+  font-size: 18px;
 }

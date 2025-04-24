@@ -11,6 +11,7 @@ import setting_icon from "./setting.svg";
 import logout_icon from "./logout.svg";
 import customer_icon from "./customer.svg";
 import search_icon from "./search.svg";
+import menuIcon from './menu.svg'
 
 export const assets = {
   logo,
@@ -26,4 +27,5 @@ export const assets = {
   logout_icon,
   setting_icon,
   search_icon,
+  menuIcon
 };
