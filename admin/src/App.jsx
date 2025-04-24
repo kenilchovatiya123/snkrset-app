@@ -6,7 +6,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import AdminLayout from "./layouts/AdminLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

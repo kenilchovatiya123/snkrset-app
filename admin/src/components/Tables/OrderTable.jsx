@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import OrderDetailsModal from "../Modals/OrderDetailsModal";
 
 const OrderTable = ({ orders }) => {
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const isValidArray = Array.isArray(orders);
 
+  const openModal = (order) => {
+    setSelectedOrder(order);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setSelectedOrder(null);
+    setShowModal(false);
+  };
+
   return (
-    <div className="overflow-x-auto shadow-md">
-      <table className="min-w-full bg-white text-sm text-left">
+    <div className="w-full overflow-x-auto rounded-lg border border-gray-200">
+      <table className="w-full bg-white text-[12px] text-left">
         <thead>
           <tr className="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
             <th className="px-4 py-3">Order ID</th>
@@ -17,6 +30,7 @@ const OrderTable = ({ orders }) => {
             <th className="px-4 py-3">Status</th>
             <th className="px-4 py-3">Date</th>
             <th className="px-4 py-3">Address</th>
+            <th className="px-4 py-3">Action</th>
           </tr>
         </thead>
         <tbody className="text-gray-700">
@@ -33,12 +47,15 @@ const OrderTable = ({ orders }) => {
               );
 
               return (
-                <tr key={order._id} className="border-b hover:bg-gray-50">
+                <tr
+                  key={order._id}
+                  className="border-b border-b-gray-200 hover:bg-gray-50"
+                >
                   <td className="px-4 py-3">{order._id.slice(-6)}</td>
                   <td className="px-4 py-3">{customerName}</td>
                   <td className="px-4 py-3">{productList}</td>
                   <td className="px-4 py-3">{totalQty}</td>
-                  <td className="px-4 py-3">₹{order.amount.toFixed(2)}</td>
+                  <td className="px-4 py-3">₹{order.amount}</td>
                   <td className="px-4 py-3">{order.paymentMethod}</td>
                   <td className="px-4 py-3">
                     <span
@@ -59,18 +76,31 @@ const OrderTable = ({ orders }) => {
                     {new Date(order.date).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3">{fullAddress}</td>
+                  <td className="px-4 py-3">
+                    <button
+                      onClick={() => openModal(order)}
+                      className="px-3 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                      View
+                    </button>
+                  </td>
                 </tr>
               );
             })
           ) : (
             <tr>
-              <td colSpan="9" className="text-center py-6 text-gray-500">
+              <td colSpan="10" className="text-center py-6 text-gray-500">
                 No orders found.
               </td>
             </tr>
           )}
         </tbody>
       </table>
+
+      {/* Modal */}
+      {showModal && (
+        <OrderDetailsModal order={selectedOrder} onClose={closeModal} />
+      )}
     </div>
   );
 };

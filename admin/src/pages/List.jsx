@@ -4,12 +4,14 @@ import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
+import ProductDetailsModal from "../components/Modals/ProductDetailsModal";
 
 const itemsPerPage = 10;
 
 const ProductList = ({ token }) => {
   const [list, setList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const fetchList = async () => {
     try {
@@ -138,10 +140,22 @@ const ProductList = ({ token }) => {
               <button className="text-blue-500 hover:underline text-sm">
                 Edit
               </button>
+              <button
+                onClick={() => setSelectedProduct(item)}
+                className="text-green-500 hover:underline text-sm"
+              >
+                View
+              </button>
             </div>
           </div>
         ))}
       </div>
+      {selectedProduct && (
+        <ProductDetailsModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </div>
   );
 };

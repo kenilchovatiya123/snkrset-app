@@ -1,43 +1,33 @@
-// src/layouts/AdminLayout.jsx
-import React from "react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/AdminNavbar";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useState } from "react";
+import Sidebar from "../layouts/AdminSidebar";
+import Navbar from "../layouts/AdminNavbar";
+import { Route, Routes } from "react-router-dom";
 import List from "../pages/List";
 import Add from "../pages/Add";
 import Orders from "../pages/Orders";
-import Dashboard from "../pages/Dashboard";
+import AdminDashboard from "../layouts/AdminDashboard";
 
-const AdminLayout = ({ token }) => {
-  const location = useLocation();
-
-  const getPageTitle = () => {
-    switch (location.pathname) {
-      case "/":
-      case "/list":
-        return "Product List";
-      case "/add":
-        return "Add Product";
-      case "/orders":
-        return "Orders";
-      default:
-        return "";
-    }
-  };
+const AdminLayout = ({ children, token }) => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   return (
-    <div className="flex bg-gray-50 min-h-screen">
-      <Sidebar />
-      <div className="flex-1 px-4 sm:px-6 md:px-8 py-6 ml-[250px]">
-        <Navbar pageTitle={getPageTitle()} />
+    <div className="flex bg-gray-50 min-h-screen overflow-x-hidden">
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+      <div className="flex-1 transition-all duration-300 px-4 sm:px-6 md:px-8 py-6 ml-0 lg:ml-64 overflow-x-hidden">
+        <Navbar toggleSidebar={toggleSidebar} />
+
         <div className="mt-6">
           <Routes>
             <Route path="/" element={<List token={token} />} />
-            <Route path="/dashboard" element={<Dashboard token={token} />} />
+            <Route
+              path="/dashboard"
+              element={<AdminDashboard token={token} />}
+            />
             <Route path="/list" element={<List token={token} />} />
             <Route path="/add" element={<Add token={token} />} />
             <Route path="/orders" element={<Orders token={token} />} />
-            {/* <Route path="/customers" element={<Customers />} /> */}
           </Routes>
         </div>
       </div>
