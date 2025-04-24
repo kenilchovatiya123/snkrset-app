@@ -4,14 +4,19 @@ import userModel from "../models/userModel.js";
 // Placing orders using COD method
 const placeOrder = async (req, res) => {
   try {
-    const { userId, items, amount, address } = req.body;
+    const { userId, items, address, totalPrice, paymentMethod } = req.body;
+
+    if (!userId || !items || !address || !totalPrice) {
+      throw new Error("Required fields missing.");
+    }
 
     const orderData = {
       userId,
       items,
       address,
-      amount,
-      paymentMethod: "COD",
+      totalPrice,
+      amount: totalPrice,
+      paymentMethod,
       payment: false,
       date: Date.now(),
     };
@@ -23,8 +28,8 @@ const placeOrder = async (req, res) => {
 
     res.json({ success: true, message: "Order Placed" });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -69,6 +74,50 @@ const updateStatus = async (req, res) => {
   }
 };
 
+// Get total number of orders
+const getOrderCount = async (req, res) => {
+  try {
+    const count = await orderModel.countDocuments();
+    res.status(200).json({ count });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get total sales amount
+const getTotalSales = async (req, res) => {
+  try {
+    const orders = await orderModel.find();
+    const totalSales = orders.reduce((sum, order) => sum + order.total, 0);
+    res.status(200).json({ totalSales });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get unique customer count
+const getCustomerCount = async (req, res) => {
+  try {
+    const orders = await orderModel.find().select("user");
+    console.log("Fetched orders:", orders);
+
+    const customerIds = orders
+      .filter((order) => order.user) // only those with a user
+      .map((order) => order.user.toString());
+
+    console.log("Customer IDs:", customerIds);
+
+    const uniqueCustomerCount = new Set(customerIds).size;
+
+    res.status(200).json({ customerCount: uniqueCustomerCount });
+  } catch (error) {
+    console.error("Customer count error:", error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
 export {
   placeOrder,
   placeOrderStripe,
@@ -76,4 +125,7 @@ export {
   allOrders,
   userOrders,
   updateStatus,
+  getOrderCount,
+  getTotalSales,
+  getCustomerCount,
 };
