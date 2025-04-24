@@ -11,6 +11,7 @@ const PlaceOrder = () => {
   const {
     navigate,
     backendUrl,
+    userId,
     token,
     cartItems,
     setCartItems,
@@ -58,31 +59,38 @@ const PlaceOrder = () => {
         }
       }
 
-      let orderData = {
-        address: formData,
+      const orderData = {
+        user: userId, // Ensure userId is coming from context or authentication
         items: orderItems,
-        amount: getCartAmount() + delivery_fee,
+        address: formData,
+        totalPrice: getCartAmount(), // If you have a function for calculating total
+        paymentMethod: method,
+        payment: method !== "cod", // Assuming COD is a cash payment and others are not
+        date: Date.now(),
       };
 
-      switch (method) {
-        // API call for COD
-        case "cod":
-          const response = await axios.post(
-            backendUrl + "/api/order/place",
-            orderData,
-            { headers: { token } }
-          );
-          // console.log(response.data);
-          if (response.data.success) {
-            setCartItems({});
-            navigate("/orders");
-          } else {
-            toast.error(response.data.message);
-          }
-          break;
-
-        default:
-          break;
+      try {
+        const response = await axios.post(
+          backendUrl + "/api/order/place",
+          orderData,
+          { headers: { token } }
+        );
+        if (response.data.success) {
+          setCartItems({});
+          navigate("/orders");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(
+          "Error details:",
+          error.response ? error.response.data : error.message
+        );
+        toast.error(
+          error.response
+            ? error.response.data.message
+            : "An unexpected error occurred"
+        );
       }
     } catch (error) {
       console.log(error);

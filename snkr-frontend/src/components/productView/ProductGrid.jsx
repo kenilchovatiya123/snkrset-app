@@ -3,8 +3,8 @@ import ProductItem from "../product/ProductItem"; // Adjust if the path is diffe
 
 const ProductGrid = ({ products }) => {
   return (
-    <section className="px-4 pt-4 pb-12 max-w-7xl mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+    <section className="my-10 px-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {products.map((item, index) => (
           <ProductItem
             key={index}
