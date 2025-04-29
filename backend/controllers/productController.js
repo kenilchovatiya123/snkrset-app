@@ -136,10 +136,76 @@ const getProductsByBrand = async (req, res) => {
   }
 };
 
+// function for update product
+// const updateProduct = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const updatedData = req.body;
+
+//     const product = await productModel.findByIdAndUpdate(id, updatedData, {
+//       new: true,
+//     });
+
+//     if (!product) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Product not found" });
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Product updated successfully!",
+//       product,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return res
+//       .status(500)
+//       .json({ success: false, message: "Something went wrong!" });
+//   }
+// };
+const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = { ...req.body };
+
+    // Handle sizes if it's a JSON string
+    if (updatedData.sizes && typeof updatedData.sizes === "string") {
+      try {
+        updatedData.sizes = JSON.parse(updatedData.sizes);
+      } catch (err) {
+        console.warn("Failed to parse sizes, keeping original string");
+      }
+    }
+
+    const product = await productModel.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
+
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Product updated successfully!",
+      product,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong!" });
+  }
+};
+
 export {
   listProducts,
   addProduct,
   removeProduct,
   singleProduct,
   getProductsByBrand,
+  updateProduct,
 };

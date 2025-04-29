@@ -6,6 +6,7 @@ import List from "../pages/List";
 import Add from "../pages/Add";
 import Orders from "../pages/Orders";
 import AdminDashboard from "../layouts/AdminDashboard";
+import Edit from "../pages/Edit";
 
 const AdminLayout = ({ children, token }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -28,6 +29,7 @@ const AdminLayout = ({ children, token }) => {
             <Route path="/list" element={<List token={token} />} />
             <Route path="/add" element={<Add token={token} />} />
             <Route path="/orders" element={<Orders token={token} />} />
+            <Route path="/edit/:id" element={<Edit token={token} />} />
           </Routes>
         </div>
       </div>

@@ -19,7 +19,7 @@ const Hero = () => {
     <div className="relative w-full overflow-hidden">
       {/* Desktop Carousel */}
       <div
-        className="hidden sm:flex transition-transform duration-700 ease-in-out"
+        className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
@@ -33,11 +33,11 @@ const Hero = () => {
       </div>
 
       {/* Mobile Image */}
-      <img
+      {/* <img
         src={assets.hero_img_mobile_screen}
         alt="hero-mobile"
         className="block sm:hidden w-full h-auto object-cover"
-      />
+      /> */}
 
       {/* Indicator Dots */}
       <div className="hidden sm:flex absolute bottom-6 left-6 gap-2">

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
 import ProductDetailsModal from "../components/Modals/ProductDetailsModal";
+import { useNavigate } from "react-router-dom";
 
 const itemsPerPage = 10;
 
@@ -12,6 +13,7 @@ const ProductList = ({ token }) => {
   const [list, setList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const navigate = useNavigate();
 
   const fetchList = async () => {
     try {
@@ -108,40 +110,52 @@ const ProductList = ({ token }) => {
         </div>
 
         {/* Table Rows */}
-        {list.map((item, i) => (
+        {list.map(({ _id, name, brand, price, stockStatus, image }, i) => (
           <div
             key={i}
             className="grid grid-cols-7 items-center px-6 py-4 text-sm bg-white border-b hover:bg-gray-50"
           >
             <div className="w-12 h-12 bg-gray-200 rounded-md overflow-hidden">
-              {item.image?.[0] && (
+              {image?.[0] && (
                 <img
-                  src={item.image[0]}
+                  src={image[0]}
                   alt="product"
                   className="object-cover w-full h-full"
                 />
               )}
             </div>
-            <span className="text-gray-800">{item.name}</span>
-            <span className="text-gray-600">{item.brand}</span>
+            <span className="text-gray-800">{name}</span>
+            <span className="text-gray-600">{brand}</span>
             <span className="text-gray-600">
               {currency}
-              {item.price}
+              {price}
             </span>
-            <span className="text-green-600">{item.stockStatus}</span>
+            <span className="text-green-600">{stockStatus}</span>
             <span className="text-blue-500">Active</span>
             <div className="flex gap-2">
               <button
-                onClick={() => removeProduct(item._id)}
+                onClick={() => removeProduct(_id)}
                 className="text-red-500 hover:underline text-sm"
               >
                 Delete
               </button>
-              <button className="text-blue-500 hover:underline text-sm">
+              <button
+                onClick={() => navigate(`/edit/${_id}`)}
+                className="text-blue-500 hover:underline text-sm"
+              >
                 Edit
               </button>
               <button
-                onClick={() => setSelectedProduct(item)}
+                onClick={() =>
+                  setSelectedProduct({
+                    _id,
+                    name,
+                    brand,
+                    price,
+                    stockStatus,
+                    image,
+                  })
+                }
                 className="text-green-500 hover:underline text-sm"
               >
                 View

@@ -1,5 +1,4 @@
-// src/component/modals/ProductDetailsModal.jsx
-import React from "react";
+import React, { useState } from "react";
 
 const ProductDetailsModal = ({ product, onClose }) => {
   if (!product) return null;
@@ -25,7 +24,7 @@ const ProductDetailsModal = ({ product, onClose }) => {
           <strong>Brand:</strong> {product.brand || "N/A"}
         </p>
         <p>
-          <strong>Price:</strong> ${product.price || "0.00"}
+          <strong>Price:</strong> ₹{product.price || "0.00"}
         </p>
         <p>
           <strong>Sizes:</strong>{" "}

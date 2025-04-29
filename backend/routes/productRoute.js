@@ -5,6 +5,7 @@ import {
   listProducts,
   singleProduct,
   getProductsByBrand,
+  updateProduct,
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
 import adminAuth from "../middleware/adminAuth.js";
@@ -52,6 +53,21 @@ productRouter.get("/list", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
+productRouter.get("/:id", async (req, res) => {
+  try {
+    const product = await productModel.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+    res.json({ success: true, product });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+productRouter.put("/products/:id", updateProduct);
 
 productRouter.get("/filter-by-brand", getProductsByBrand);
 

@@ -25,7 +25,8 @@ h3,
 span,
 th,
 td,
-label {
+label,
+.custom-font {
   font-family: Helvetica;
   /* text-transform: uppercase; */
 }
